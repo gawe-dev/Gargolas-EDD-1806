@@ -1,0 +1,172 @@
+extends CharacterBody3D
+
+@onready var climb_ray:RayCast3D = $LowBody/ClimbRay
+@onready var high_body:Node3D = $HighBody
+@onready var timer : Timer = $Timer
+@onready var bullet : Node3D = $HighBody/MeshGun/Bullet
+
+var target:Node3D
+var drops:Node
+var flags:Array[Node3D]
+
+func _ready():
+	##Obtener todas las banderas del spawn de esta instancia
+	for node in get_parent().find_children("Flag*", "Node3D",false):
+		flags.push_back(node)
+	
+	##Obtener player para targetear
+	target = get_tree().current_scene.get_node("%Player")
+	
+	##Conectar timer con callback
+	timer.timeout.connect(ShootOrReload)
+
+var delta : float
+func _physics_process(_delta):
+	delta = _delta
+	ManageGravity()
+	ManageForward()
+	ManageDuty()
+	RotateToward()
+	move_and_slide()
+	SensorClimb()
+	SensorPrepareAim()
+
+#region Management
+
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+func ManageGravity():
+	if GravityState == GravityTypes.Falling:
+		velocity.y -= gravity * delta
+	if GravityState == GravityTypes.Climbing:
+		velocity.y = 2
+	if GravityState == GravityTypes.Infiltrating:
+		climb_ray.get_collider().GetDamage(1)
+		queue_free()
+
+
+var speed : float
+enum ForwardTypes { Walk, Stop }
+var ForwardMode : ForwardTypes
+func ManageForward():
+	velocity.x = global_basis.z.x * speed
+	velocity.z = global_basis.z.z * speed
+	if ForwardMode == ForwardTypes.Walk:
+		speed = 1
+	if ForwardMode == ForwardTypes.Stop:
+		speed = 0
+
+
+var reloading : bool = false
+func ManageDuty():
+	if target_in_range:
+		high_body.look_at(target.global_position, Vector3.UP, true)
+		if not reloading:
+			ForwardMode = ForwardTypes.Stop
+			AimAndShoot()
+	#elif barricade_in_range:
+	else:
+		if high_body.rotation != Vector3.ZERO:
+			high_body.rotation = Vector3.ZERO
+
+
+var can_shoot := true
+func AimAndShoot():
+	if can_shoot:
+		can_shoot = false
+		timer.start()
+
+func ShootOrReload():
+	if not reloading:
+		print("disparado")
+		bullet.shootBullet()
+		can_shoot = false
+		reloading = true
+		timer.wait_time = 5
+		timer.start()
+	else:
+		timer.wait_time = 5
+		can_shoot = true
+		reloading = false
+
+
+
+var current_flag = 0
+func RotateToward():
+	#si actual barricada no tiene propiedad destruida en true
+	#si mi padre es cover
+	if get_parent().name.contains("Cover"):
+		if ForwardMode != ForwardTypes.Stop:
+			#si estoy lejos de cover
+			if (global_position - get_parent().global_position).length() > .5:
+				look_at(get_parent().global_position, Vector3.UP,true)
+				rotation.x = 0
+				rotation.z = 0
+			else:
+				ForwardMode = ForwardTypes.Stop
+#   si mi padre no es cover
+	else:
+		#si la bandera tiene hijos
+		if flags[current_flag].find_children("Cover*").size() != 0:
+			#recorrer cada hijo (cover)
+			for cover in flags[current_flag].find_children("Cover*"):
+				#si cover no tiene un hijo
+				if cover.get_child_count() == 0:
+					#emparentar esta instancia a cover
+					reparent(cover)
+			#si para este punto no tiene de padre a cover
+			if not get_parent().name.contains("Cover"):
+				NextFlagOrDie()
+		else: #si la bandera no tiene hijos
+			NextFlagOrDie()
+			look_at(flags[current_flag].global_position, Vector3.UP,true)
+
+func NextFlagOrDie():
+	if (global_position - flags[current_flag].global_position).length() < 1:
+		if current_flag + 1 < flags.size():
+			current_flag += 1
+		else:
+			queue_free()
+
+#endregion
+
+
+#region Sensores
+
+enum GravityTypes { Falling, Climbing, Infiltrating }
+var GravityState:GravityTypes
+func SensorClimb():
+	if climb_ray.is_colliding():
+		if climb_ray.get_collider().is_in_group("Stair"):
+			GravityState = GravityTypes.Climbing
+		if climb_ray.get_collider().is_in_group("Barricade"):
+			GravityState = GravityTypes.Infiltrating
+	else:
+		GravityState = GravityTypes.Falling
+
+var target_in_range := false
+func SensorPrepareAim():
+	if (global_position - target.global_position).length() < (bullet.RANGE - 5):
+		target_in_range = true
+	
+	#if (global_position - barricades[current_barricade].global_position).length() < (shoot_ray.target_position.z):#
+		pass
+	
+
+#endregion
+
+
+#region Calleables
+
+
+var health := 1
+func GetDamage(damage:int):
+	health -= damage
+	if health <= 0:
+		drops.createDrop(global_position)
+		queue_free()
+
+
+#endregion
+
+
+
