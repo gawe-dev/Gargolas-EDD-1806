@@ -159,10 +159,10 @@ func SensorClimb():
 var target_in_range := false
 var barricade_in_range := false
 func SensorPrepareAim():
+	
 	target_in_range = (global_position - target.global_position).length() < (bullet.RANGE - 5)
 	
 	barricade_in_range = (global_position - barricades[current_barricade].global_position).length() < bullet.RANGE
-
 	
 
 #endregion

@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcwpuon7kyju4"]
-
-[ext_resource type="PackedScene" uid="uid://b63iywb03ygwr" path="res://MusketeerSpawner/SpawnMusketeer.tscn" id="1_iuqjw"]
-
-[node name="Wave0" type="Node3D"]
-
-[node name="SpawnMusketeer" parent="." instance=ExtResource("1_iuqjw")]

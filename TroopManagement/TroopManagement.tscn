@@ -1,19 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqdau0k3eifk1"]
+[gd_scene load_steps=3 format=3 uid="uid://dqdau0k3eifk1"]
 
 [ext_resource type="Script" path="res://TroopManagement/TroopManagement.gd" id="1_h6td5"]
-[ext_resource type="PackedScene" uid="uid://wl6kycja53b7" path="res://TroopManagement/Wave1.tscn" id="1_n6sbj"]
-[ext_resource type="PackedScene" uid="uid://bcwpuon7kyju4" path="res://TroopManagement/Wave0.tscn" id="2_3tqi6"]
+[ext_resource type="PackedScene" uid="uid://b63iywb03ygwr" path="res://MusketeerSpawner/SpawnMusketeer.tscn" id="2_uoaej"]
 
 [node name="TroopManagement" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 script = ExtResource("1_h6td5")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
-[node name="Wave0" parent="." instance=ExtResource("2_3tqi6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013813, 0, 3.95711)
+[node name="Wave0" type="Node3D" parent="."]
 
-[node name="Wave1" parent="." instance=ExtResource("1_n6sbj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+[node name="SpawnMusketeer" parent="Wave0" instance=ExtResource("2_uoaej")]
+
+[editable path="Wave0/SpawnMusketeer"]
