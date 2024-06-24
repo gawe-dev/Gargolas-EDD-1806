@@ -60,6 +60,23 @@ calculate_tangents = false
 use_collision = true
 size = Vector3(40, 4, 0.623047)
 
+[node name="Lanes" type="Node" parent="."]
+
+[node name="Left" type="Node" parent="Lanes"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Lanes/Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5322, 2, -25.3722)
+
+[node name="Mid" type="Node" parent="Lanes"]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Lanes/Mid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.532202, 2, -25.3722)
+
+[node name="Right" type="Node" parent="Lanes"]
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Lanes/Right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4678, 2, -25.3722)
+
 [node name="Player" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -37.31, 0.186)
@@ -79,4 +96,4 @@ mesh = SubResource("BoxMesh_6e08q")
 transform = Transform3D(-0.131235, -0.337177, 0.932249, -0.0470018, 0.941441, 0.333885, -0.990236, 1.50479e-08, -0.139398, 15.0296, 6.11026, -36.3087)
 
 [node name="TroopManagement" parent="." instance=ExtResource("2_yotfc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00146, 0.500002, -42.5049)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.00146, 0.510955, -42.5049)

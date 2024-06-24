@@ -9,10 +9,17 @@ var target:Node3D
 var drops:Node
 var flags:Array[Node3D]
 
+var laneAttack:String # se setea desde spawner
+var barricades:Array[Node3D]
+
 func _ready():
 	##Obtener todas las banderas del spawn de esta instancia
 	for node in get_parent().find_children("Flag*", "Node3D",false):
 		flags.push_back(node)
+	
+	##Obtener todas las barricadas de la linea sugerida por el spawn
+	for node in get_tree().current_scene.find_child(laneAttack).get_children(false):
+		barricades.push_back(node)
 	
 	##Obtener player para targetear
 	target = get_tree().current_scene.get_node("%Player")
@@ -26,8 +33,9 @@ func _physics_process(_delta):
 	ManageGravity()
 	ManageForward()
 	ManageDuty()
-	RotateToward()
+	ManageRoute()
 	move_and_slide()
+	UpdateCurrentBarricade()
 	SensorClimb()
 	SensorPrepareAim()
 
@@ -63,7 +71,9 @@ func ManageDuty():
 		if not reloading:
 			ForwardMode = ForwardTypes.Stop
 			AimAndShoot()
-	#elif barricade_in_range:
+	elif barricade_in_range:
+		if not reloading:
+			AimAndShoot()
 	else:
 		if high_body.rotation != Vector3.ZERO:
 			high_body.rotation = Vector3.ZERO
@@ -89,9 +99,8 @@ func ShootOrReload():
 		reloading = false
 
 
-
 var current_flag = 0
-func RotateToward():
+func ManageRoute():
 	#si actual barricada no tiene propiedad destruida en true
 	#si mi padre es cover
 	if get_parent().name.contains("Cover"):
@@ -131,6 +140,10 @@ func NextFlagOrDie():
 
 
 #region Sensores
+var current_barricade := 0
+func UpdateCurrentBarricade():
+	if barricade_in_range and barricades[current_barricade].name.contains("Down"):
+		current_barricade += 1
 
 enum GravityTypes { Falling, Climbing, Infiltrating }
 var GravityState:GravityTypes
@@ -144,12 +157,12 @@ func SensorClimb():
 		GravityState = GravityTypes.Falling
 
 var target_in_range := false
+var barricade_in_range := false
 func SensorPrepareAim():
-	if (global_position - target.global_position).length() < (bullet.RANGE - 5):
-		target_in_range = true
+	target_in_range = (global_position - target.global_position).length() < (bullet.RANGE - 5)
 	
-	#if (global_position - barricades[current_barricade].global_position).length() < (shoot_ray.target_position.z):#
-		pass
+	barricade_in_range = (global_position - barricades[current_barricade].global_position).length() < bullet.RANGE
+
 	
 
 #endregion

@@ -9,7 +9,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 laneAttack = "Left"
 
 [node name="SpawnMusketeerMid" parent="." instance=ExtResource("1_c4jak")]
-laneAttack = "Mid"
 
 [node name="SpawnMusketeerRight" parent="." instance=ExtResource("1_c4jak")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)

@@ -5,4 +5,3 @@
 [node name="Wave0" type="Node3D"]
 
 [node name="SpawnMusketeer" parent="." instance=ExtResource("1_iuqjw")]
-laneAttack = "Mid"
