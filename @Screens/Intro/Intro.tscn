@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk3llvpqgnn6t"]
+
+[ext_resource type="Script" path="res://@Screens/Intro/Intro.gd" id="1_vwbr8"]
+[ext_resource type="VideoStream" path="res://@Screens/Intro/Intro.ogv" id="1_xsn57"]
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_vwbr8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -653.0
+offset_top = -366.0
+offset_right = 1267.0
+offset_bottom = 722.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.68, 0.68)
+stream = ExtResource("1_xsn57")
+autoplay = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 280.0
+offset_right = 559.0
+offset_bottom = 311.0
+text = "Saltear
+"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -90.0
+offset_right = 93.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 65
+text = "UNSO"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.0
+offset_right = 93.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 65
+text = "Gárgolas EDD
+placeholder"
+horizontal_alignment = 1

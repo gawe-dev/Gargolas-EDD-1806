@@ -72,6 +72,7 @@ func ManageDuty():
 			ForwardMode = ForwardTypes.Stop
 			AimAndShoot()
 	elif barricade_in_range:
+		high_body.look_at(barricades[current_barricade].global_position, Vector3.UP, true)
 		if not reloading:
 			AimAndShoot()
 	else:
