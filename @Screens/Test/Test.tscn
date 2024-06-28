@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://@Screens/Test/TestPlayer.gd" id="2_gknu1"]
 [ext_resource type="PackedScene" uid="uid://dqdau0k3eifk1" path="res://TroopManagement/TroopManagement.tscn" id="2_yotfc"]
 [ext_resource type="PackedScene" uid="uid://b63iywb03ygwr" path="res://MusketeerSpawner/SpawnMusketeer.tscn" id="3_h4fj8"]
-[ext_resource type="AudioStream" uid="uid://11dmbwpbno0r" path="res://@Screens/Lvl1Summary/Gameplay.ogg" id="4_dptik"]
+[ext_resource type="AudioStream" uid="uid://11dmbwpbno0r" path="res://@Screens/Lvl1Gameplay/Gameplay.ogg" id="4_dptik"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gxf6y"]
 sky_top_color = Color(0.180392, 0.227451, 0.286275, 1)

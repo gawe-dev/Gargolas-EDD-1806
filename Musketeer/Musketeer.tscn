@@ -61,8 +61,7 @@ transform = Transform3D(1, 3.11218e-12, 0, 2.67164e-12, 1, 3.49246e-10, 8.73115e
 mesh = SubResource("BoxMesh_aobbo")
 
 [node name="Bullet" type="Area3D" parent="HighBody/MeshGun"]
-transform = Transform3D(1, 0, 0, -3.04932e-20, 1, 0, 0, 0, 1, 0, 0, 0.0897106)
-monitorable = false
+transform = Transform3D(1, 0, 0, -3.04932e-20, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_4ywf7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HighBody/MeshGun/Bullet"]

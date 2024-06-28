@@ -11,6 +11,7 @@ var flags:Array[Node3D]
 
 var laneAttack:String # se setea desde spawner
 var barricades:Array[Node3D]
+var barricadeFinal:Node3D
 
 func _ready():
 	##Obtener todas las banderas del spawn de esta instancia
@@ -23,6 +24,8 @@ func _ready():
 	
 	##Obtener player para targetear
 	target = get_tree().current_scene.get_node("%Player")
+	drops = get_tree().current_scene.get_node("%Drops")
+	barricadeFinal = get_tree().current_scene.get_node("%BarricadeFinal")
 	
 	##Conectar timer con callback
 	timer.timeout.connect(ShootOrReload)
@@ -69,10 +72,12 @@ func ManageDuty():
 	if target_in_range:
 		high_body.look_at(target.global_position, Vector3.UP, true)
 		if not reloading:
-			ForwardMode = ForwardTypes.Stop
 			AimAndShoot()
 	elif barricade_in_range:
-		high_body.look_at(barricades[current_barricade].global_position, Vector3.UP, true)
+		if current_barricade < barricades.size():
+			high_body.look_at(barricades[current_barricade].global_position, Vector3.UP, true)
+		else:
+			high_body.look_at(barricadeFinal.global_position, Vector3.UP, true)
 		if not reloading:
 			AimAndShoot()
 	else:
@@ -88,7 +93,6 @@ func AimAndShoot():
 
 func ShootOrReload():
 	if not reloading:
-		print("disparado")
 		bullet.shootBullet()
 		can_shoot = false
 		reloading = true
@@ -105,7 +109,6 @@ func ManageRoute():
 	#si actual barricada no tiene propiedad destruida en true
 	#si mi padre es cover
 	if get_parent().name.contains("Cover"):
-		if ForwardMode != ForwardTypes.Stop:
 			#si estoy lejos de cover
 			if (global_position - get_parent().global_position).length() > .5:
 				look_at(get_parent().global_position, Vector3.UP,true)
@@ -141,10 +144,14 @@ func NextFlagOrDie():
 
 
 #region Sensores
+
+
 var current_barricade := 0
 func UpdateCurrentBarricade():
-	if barricade_in_range and barricades[current_barricade].name.contains("Down"):
-		current_barricade += 1
+	
+	if current_barricade < barricades.size():
+		if barricade_in_range and barricades[current_barricade].name.contains("Down"):
+			current_barricade += 1
 
 enum GravityTypes { Falling, Climbing, Infiltrating }
 var GravityState:GravityTypes
@@ -163,8 +170,11 @@ func SensorPrepareAim():
 	
 	target_in_range = (global_position - target.global_position).length() < (bullet.RANGE - 5)
 	
-	barricade_in_range = (global_position - barricades[current_barricade].global_position).length() < bullet.RANGE
 	
+	if current_barricade < barricades.size()-1:
+		barricade_in_range = (global_position - barricades[current_barricade].global_position).length() < bullet.RANGE
+	else:
+		barricade_in_range = (global_position - barricadeFinal.global_position).length() < bullet.RANGE
 
 #endregion
 

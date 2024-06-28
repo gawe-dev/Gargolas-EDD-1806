@@ -10,6 +10,7 @@ func _ready():
 func _process(delta):
 	if shooted:
 		global_position.x += global_basis.z.x * 15 * delta
+		global_position.y += global_basis.z.y * 15 * delta
 		global_position.z += global_basis.z.z * 15 * delta
 	if (Vector3.ZERO - position).length() > RANGE:
 		initial()

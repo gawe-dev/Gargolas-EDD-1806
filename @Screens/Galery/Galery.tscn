@@ -1,0 +1,133 @@
+[gd_scene load_steps=26 format=3 uid="uid://b37efxgd15yaq"]
+
+[ext_resource type="AudioStream" uid="uid://daw734l4kcxl0" path="res://@Screens/Galery/Galery.ogg" id="1_y8imy"]
+[ext_resource type="PackedScene" uid="uid://bwavtdstqpy2e" path="res://@Commons/GLB/Caldero.glb" id="2_571nk"]
+[ext_resource type="PackedScene" uid="uid://dphnhaaaecq63" path="res://@Commons/GLB/Escalera.glb" id="3_h52br"]
+[ext_resource type="PackedScene" uid="uid://dnaf1h37u1xlw" path="res://@Commons/GLB/Mate.glb" id="4_5cc12"]
+[ext_resource type="PackedScene" uid="uid://m8u23myrom62" path="res://@Commons/GLB/arquebus.glb" id="5_4r1qq"]
+[ext_resource type="PackedScene" uid="uid://dfid3c0t03quk" path="res://@Commons/GLB/sword.glb" id="6_7snul"]
+[ext_resource type="PackedScene" uid="uid://dakpu5sabbcbx" path="res://@Commons/GLB/musket.glb" id="7_ajb2s"]
+[ext_resource type="PackedScene" uid="uid://bxfpuptbgx2sh" path="res://@Commons/Blend/Enemigo.blend" id="8_j18tj"]
+[ext_resource type="PackedScene" uid="uid://bnce6elo16apj" path="res://@Commons/Blend/Parte_Inf.blend" id="9_aewbv"]
+[ext_resource type="PackedScene" uid="uid://gsdbrnelm65t" path="res://@Commons/Blend/Parte_Sup.blend" id="10_jed6t"]
+[ext_resource type="PackedScene" uid="uid://b3x65sa5oi0w1" path="res://@Commons/GLB/Gancho_0.0.glb" id="11_ksib2"]
+[ext_resource type="PackedScene" uid="uid://vb4r7csmj7kq" path="res://@Commons/GLB/Pistola.glb" id="12_ohwpp"]
+[ext_resource type="PackedScene" uid="uid://x6c62rtcu26x" path="res://@Commons/GLB/Barril.glb" id="13_orwn3"]
+[ext_resource type="PackedScene" uid="uid://yg7ry2qpipu1" path="res://@Commons/GLB/Barricada.glb" id="14_0mhty"]
+[ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="15_4f18n"]
+[ext_resource type="PackedScene" uid="uid://dyqj3jg8ffx7r" path="res://@Commons/GLB/recova._1.glb" id="16_tv763"]
+[ext_resource type="PackedScene" uid="uid://dvqbm27mff8gy" path="res://@Commons/GLB/Granada.glb" id="17_myvs5"]
+[ext_resource type="PackedScene" uid="uid://cghvhauao4drx" path="res://@Commons/GLB/Granada Humo.glb" id="18_nmo1j"]
+[ext_resource type="Texture2D" uid="uid://bwm65sba751rt" path="res://@Screens/Galery/MenuTemplate.png" id="19_dpj05"]
+[ext_resource type="Texture2D" uid="uid://cfi3c2kd15y17" path="res://@Screens/Galery/wooden-buttons-with-gold-silver-frames_107791-12627.png" id="20_eolwx"]
+[ext_resource type="Texture2D" uid="uid://cv4cn753p0nx8" path="res://@Screens/Galery/game-level-ui-icons-buttons-isolated-frames-set_107791-12219.png" id="21_d0w8g"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_heyi6"]
+sky_top_color = Color(0.0470588, 0.164706, 0.317647, 1)
+sky_horizon_color = Color(0.561765, 0.583333, 0.612745, 1)
+ground_bottom_color = Color(0.2, 0.168627, 0.133333, 1)
+ground_horizon_color = Color(0.561765, 0.583333, 0.612745, 1)
+
+[sub_resource type="Sky" id="Sky_5okwx"]
+sky_material = SubResource("ProceduralSkyMaterial_heyi6")
+
+[sub_resource type="Environment" id="Environment_id0sp"]
+background_mode = 2
+sky = SubResource("Sky_5okwx")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cetii"]
+transparency = 1
+albedo_color = Color(0.0117647, 0.219608, 0, 0.407843)
+
+[node name="Museum" type="Node"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_y8imy")
+autoplay = true
+
+[node name="env" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+environment = SubResource("Environment_id0sp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_color = Color(0.709804, 0.709804, 0.709804, 1)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="env"]
+material_override = SubResource("StandardMaterial3D_cetii")
+use_collision = true
+size = Vector3(14.8076, 1, 14.5859)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6253, 7.12212, 16.6922)
+material_override = SubResource("StandardMaterial3D_cetii")
+use_collision = true
+size = Vector3(14.8076, 17.7842, 14.5859)
+
+[node name="Assets" type="Node" parent="."]
+
+[node name="Caldero" parent="Assets" instance=ExtResource("2_571nk")]
+transform = Transform3D(0.41, 0, 0, 0, 0.41, 0, 0, 0, 0.41, -4.26444, 0.921521, 4.74567)
+
+[node name="Escalera2" parent="Assets" instance=ExtResource("3_h52br")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.68629, 0, 1.97928)
+
+[node name="Mate" parent="Assets" instance=ExtResource("4_5cc12")]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, -5.43337, 0.698777, -1.24798)
+
+[node name="arquebus" parent="Assets" instance=ExtResource("5_4r1qq")]
+transform = Transform3D(3.02, 0, 0, 0, 3.02, 0, 0, 0, 3.02, 2.96671, 2.20166, 5.08807)
+
+[node name="sword" parent="Assets" instance=ExtResource("6_7snul")]
+transform = Transform3D(-3.66799, 0, 1.59557, 0, 4, 0, -1.59557, 0, -3.66799, -0.820418, 2.75659, 5.48126)
+
+[node name="musket" parent="Assets" instance=ExtResource("7_ajb2s")]
+transform = Transform3D(4.46674, 0, -2.24683, 0, 5, 0, 2.24683, 0, 4.46674, 4.84078, 2.01269, 3.7797)
+
+[node name="Enemigo" parent="Assets" instance=ExtResource("8_j18tj")]
+transform = Transform3D(-0.195018, 0, -0.0443642, 0, 0.2, 0, 0.0443642, 0, -0.195018, 0.336445, 0.464533, -5.50615)
+
+[node name="Parte_Inf" parent="Assets" instance=ExtResource("9_aewbv")]
+transform = Transform3D(0.935, 0, 0, 0, 0.935, 0, 0, 0, 0.935, 2.66256, 0.56732, -5.73736)
+
+[node name="Parte_Sup" parent="Assets" instance=ExtResource("10_jed6t")]
+transform = Transform3D(0.935, 0, 0, 0, 0.935, 0, 0, 0, 0.935, 2.68275, 0.646561, -5.74215)
+
+[node name="Gancho_0_0" parent="Assets" instance=ExtResource("11_ksib2")]
+transform = Transform3D(1.55, 0, 0, 0, 1.55, 0, 0, 0, 1.55, 5.17433, 0.487352, 1.20173)
+
+[node name="Pistola2" parent="Assets" instance=ExtResource("12_ohwpp")]
+transform = Transform3D(0.677537, 0, 0.194857, 0, 0.705, 0, -0.194857, 0, 0.677537, 5.72472, 0.385589, -1.18255)
+
+[node name="Barril2" parent="Assets" instance=ExtResource("13_orwn3")]
+transform = Transform3D(0.78, 0, 0, 0, 0.78, 0, 0, 0, 0.78, 5.82977, 0.507652, -4.08311)
+
+[node name="Barricada" parent="Assets" instance=ExtResource("14_0mhty")]
+transform = Transform3D(0.480248, 0, 0.268071, 0, 0.55, 0, -0.268071, 0, 0.480248, -3.55909, 0.530908, -4.89212)
+
+[node name="Player" parent="Assets" instance=ExtResource("15_4f18n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.63889, 0)
+
+[node name="recova__1" parent="Assets" instance=ExtResource("16_tv763")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6847, 0, 0.536105)
+
+[node name="Granada2" parent="Assets" instance=ExtResource("17_myvs5")]
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 15.7734, 16.0446, 20.8568)
+
+[node name="Granada Humo" parent="Assets" instance=ExtResource("18_nmo1j")]
+transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, 14.4641, 16.6622, 17.6246)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.803078, 0, -0.595875, 0, 1, 0, 0.595875, 0, 0.803078, 6.6576, 5.1374, -8.55392)
+texture = ExtResource("19_dpj05")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9719, 17.8161, 23.1956)
+texture = ExtResource("20_eolwx")
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform3D(-0.0205934, 0, -0.999788, 0, 1, 0, 0.999788, 0, -0.0205934, 12.1277, 3.95418, 1.05124)
+texture = ExtResource("21_d0w8g")

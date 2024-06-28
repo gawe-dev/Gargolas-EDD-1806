@@ -1,0 +1,331 @@
+[gd_scene load_steps=19 format=3 uid="uid://d2sj1dne5pq2b"]
+
+[ext_resource type="PackedScene" uid="uid://bo24dt5p27wq3" path="res://Staticbodies/Ground/Ground.tscn" id="1_2rdhq"]
+[ext_resource type="PackedScene" uid="uid://dqdau0k3eifk1" path="res://TroopManagement/TroopManagement.tscn" id="2_gwk67"]
+[ext_resource type="PackedScene" uid="uid://b7dx001ssgksd" path="res://Staticbodies/House/House.tscn" id="2_wylwe"]
+[ext_resource type="PackedScene" uid="uid://266hoadaaper" path="res://Staticbodies/Stair/Stair.tscn" id="3_ya4uq"]
+[ext_resource type="PackedScene" uid="uid://dhx4m4bykwvss" path="res://Staticbodies/Barricade/Barricade.tscn" id="4_asc8u"]
+[ext_resource type="PackedScene" uid="uid://b63iywb03ygwr" path="res://MusketeerSpawner/SpawnMusketeer.tscn" id="4_ugao0"]
+[ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="5_mjyjp"]
+[ext_resource type="PackedScene" uid="uid://dd6ise8354thi" path="res://ArquebusierSpawner/SpawnArquebusier.tscn" id="7_0glet"]
+[ext_resource type="AudioStream" uid="uid://11dmbwpbno0r" path="res://@Screens/Lvl1Gameplay/Gameplay.ogg" id="7_gkbgt"]
+[ext_resource type="PackedScene" uid="uid://c6lmichtnv4av" path="res://Drops/PlacementDrop.tscn" id="8_hpbed"]
+[ext_resource type="PackedScene" uid="uid://hwtyetar2ijw" path="res://Boiler/Boiler.tscn" id="9_lih6a"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tg6ly"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_lat7l"]
+sky_material = SubResource("ProceduralSkyMaterial_tg6ly")
+
+[sub_resource type="Environment" id="Environment_p6enc"]
+background_mode = 2
+sky = SubResource("Sky_lat7l")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4piu"]
+albedo_color = Color(0.5, 0, 0, 0.392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2qrpk"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swc6d"]
+transparency = 1
+albedo_color = Color(1, 0.368627, 0, 0.490196)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7g6j2"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Level 1" type="Node"]
+
+[node name="Env" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Env"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 10.6396)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Env"]
+environment = SubResource("Environment_p6enc")
+
+[node name="StaticBodies" type="Node" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Ground" parent="StaticBodies" instance=ExtResource("1_2rdhq")]
+metadata/_edit_lock_ = true
+
+[node name="House" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 14)
+
+[node name="House2" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+
+[node name="House3" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
+
+[node name="House4" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -5.72981, 0, -9.66875)
+
+[node name="Stair" parent="StaticBodies/House4" instance=ExtResource("3_ya4uq")]
+transform = Transform3D(0.154745, 0, -0.987955, 0, 1, 0, 0.987955, 0, 0.154745, 1.25473, 0, -3.12423)
+
+[node name="House15" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -18.4452, -1.90735e-06, -10.6769)
+
+[node name="House9" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -4)
+
+[node name="House11" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 6, -4)
+
+[node name="House10" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 6.34041, 0, -9.76248)
+
+[node name="Stair" parent="StaticBodies/House10" instance=ExtResource("3_ya4uq")]
+transform = Transform3D(-8.9407e-08, 0, 1, 0, 1, 0, -1, 0, -8.9407e-08, -1.00612, 0, -3.07432)
+
+[node name="House13" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 24.6195, 0, -4.89474)
+
+[node name="House14" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 18.1166, 0, -11.1365)
+
+[node name="House5" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37092, 0, 14)
+
+[node name="House6" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37092, 0, 8)
+
+[node name="House7" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37092, 0, 2)
+
+[node name="House8" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37092, 0, -4)
+
+[node name="Boiler" parent="StaticBodies" instance=ExtResource("9_lih6a")]
+transform = Transform3D(0.640887, 0, -0.767635, 0, 1, 0, 0.767635, 0, 0.640887, 6.13179, 5.91641, 4.64715)
+
+[node name="House12" parent="StaticBodies" instance=ExtResource("2_wylwe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.37092, 6, -4)
+
+[node name="TroopManagement" parent="." instance=ExtResource("2_gwk67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -21.856)
+
+[node name="Flag1" parent="TroopManagement/Wave0/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.73414)
+
+[node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave0/SpawnMusketeer" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46.383)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave0/SpawnMusketeer/FlagFinal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="Wave1" type="Node3D" parent="TroopManagement"]
+
+[node name="SpawnMusketeer" parent="TroopManagement/Wave1" instance=ExtResource("4_ugao0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07108, 0, 0)
+
+[node name="Flag1" parent="TroopManagement/Wave1/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.49814)
+
+[node name="Flag2" type="Node3D" parent="TroopManagement/Wave1/SpawnMusketeer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08945, 0, 8.74738)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeer/Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="Cover1" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeer/Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.53045, 5.56211, 4.95663)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave1/SpawnMusketeer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46.2794)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeer/FlagFinal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="SpawnMusketeer2" parent="TroopManagement/Wave1" instance=ExtResource("4_ugao0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.07566, 0, 0)
+
+[node name="Flag1" parent="TroopManagement/Wave1/SpawnMusketeer2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.57388)
+
+[node name="Flag2" type="Node3D" parent="TroopManagement/Wave1/SpawnMusketeer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00883, 0, 8.75773)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeer2/Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="Cover1" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeer2/Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.56548, 5.56237, 5.11007)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave1/SpawnMusketeer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46.3752)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeer2/FlagFinal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="Wave2" type="Node3D" parent="TroopManagement"]
+
+[node name="SpawnArquebusier2" parent="TroopManagement/Wave2" instance=ExtResource("7_0glet")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9809, 0, 0)
+laneAttack = "Left"
+
+[node name="Cover" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier2/Flag1" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26859, 0.05, 8.82946)
+material_override = SubResource("StandardMaterial3D_swc6d")
+mesh = SubResource("BoxMesh_7g6j2")
+
+[node name="Flag2" type="Node3D" parent="TroopManagement/Wave2/SpawnArquebusier2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43297, 0, 10.7783)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier2/Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_swc6d")
+mesh = SubResource("BoxMesh_7g6j2")
+
+[node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave2/SpawnArquebusier2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66475, 0, 41.9774)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier2/FlagFinal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_swc6d")
+mesh = SubResource("BoxMesh_7g6j2")
+
+[node name="SpawnMusketeer2" parent="TroopManagement/Wave2" instance=ExtResource("4_ugao0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4791, 0, 0)
+laneAttack = "Left"
+
+[node name="Flag1" parent="TroopManagement/Wave2/SpawnMusketeer2" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.7786)
+
+[node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave2/SpawnMusketeer2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9639, 0, 46.2116)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnMusketeer2/FlagFinal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="SpawnMusketeer" parent="TroopManagement/Wave2" instance=ExtResource("4_ugao0")]
+
+[node name="Flag1" parent="TroopManagement/Wave2/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.73414)
+
+[node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave2/SpawnMusketeer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46.3983)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnMusketeer/FlagFinal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="SpawnMusketeer3" parent="TroopManagement/Wave2" instance=ExtResource("4_ugao0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7493, 0, 0)
+laneAttack = "Right"
+
+[node name="Flag1" parent="TroopManagement/Wave2/SpawnMusketeer3" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.487282, 0, 11.3545)
+
+[node name="Flag2" type="Node3D" parent="TroopManagement/Wave2/SpawnMusketeer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56687, 0, 20.3931)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnMusketeer3/Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave2/SpawnMusketeer3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99249, 0, 46.442)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnMusketeer3/FlagFinal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="SpawnArquebusier" parent="TroopManagement/Wave2" instance=ExtResource("7_0glet")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0114, 0, 0)
+laneAttack = "Right"
+
+[node name="Cover1" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier/Flag1" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.75416, 0.0499991, 9.32792)
+material_override = SubResource("StandardMaterial3D_swc6d")
+mesh = SubResource("BoxMesh_7g6j2")
+
+[node name="Flag2" type="Node3D" parent="TroopManagement/Wave2/SpawnArquebusier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11224, 0, 11.2201)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier/Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_swc6d")
+mesh = SubResource("BoxMesh_7g6j2")
+
+[node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave2/SpawnArquebusier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64666, 0, 45.0891)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier/FlagFinal"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_swc6d")
+mesh = SubResource("BoxMesh_7g6j2")
+
+[node name="Left" type="Node" parent="."]
+
+[node name="Barricade" parent="Left" instance=ExtResource("4_asc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4228, 0.5, 0)
+
+[node name="Barricade2" parent="Left" instance=ExtResource("4_asc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.4228, 0.5, 15.2955)
+
+[node name="Mid" type="Node" parent="."]
+
+[node name="Barricade" parent="Mid" instance=ExtResource("4_asc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Barricade2" parent="Mid" instance=ExtResource("4_asc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 15.2955)
+
+[node name="Right" type="Node" parent="."]
+
+[node name="Barricade" parent="Right" instance=ExtResource("4_asc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2603, 0.5, 0)
+
+[node name="Barricade2" parent="Right" instance=ExtResource("4_asc8u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2603, 0.5, 15.2955)
+
+[node name="BarricadeFinal" parent="." instance=ExtResource("4_asc8u")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 24.0219)
+
+[node name="Player" parent="." instance=ExtResource("5_mjyjp")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.73649, 22)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_gkbgt")
+autoplay = true
+
+[node name="Drops" parent="." instance=ExtResource("8_hpbed")]
+unique_name_in_owner = true
+
+[editable path="TroopManagement"]
+[editable path="TroopManagement/Wave0/SpawnMusketeer"]
+[editable path="TroopManagement/Wave1/SpawnMusketeer"]
+[editable path="TroopManagement/Wave1/SpawnMusketeer2"]
+[editable path="TroopManagement/Wave2/SpawnArquebusier2"]
+[editable path="TroopManagement/Wave2/SpawnMusketeer2"]
+[editable path="TroopManagement/Wave2/SpawnMusketeer"]
+[editable path="TroopManagement/Wave2/SpawnMusketeer3"]
+[editable path="TroopManagement/Wave2/SpawnArquebusier"]

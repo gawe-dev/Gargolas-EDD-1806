@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7dx001ssgksd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_w4ym2"]
+size = Vector3(6, 6, 6)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jyer4"]
+points = PackedVector3Array(3, 3, 3, 3, 3, -3, -3, 3, 3, 3, -3, 3, 3, -3, -3, -3, 3, -3, -3, -3, 3, -3, -3, -3)
+
+[node name="House" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+mesh = SubResource("BoxMesh_w4ym2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("ConvexPolygonShape3D_jyer4")

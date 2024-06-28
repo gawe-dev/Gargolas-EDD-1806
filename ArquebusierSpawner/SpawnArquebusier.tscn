@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd6ise8354thi"]
+
+[ext_resource type="Script" path="res://ArquebusierSpawner/SpawnArquebusier.gd" id="1_vxwf1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swc6d"]
+transparency = 1
+albedo_color = Color(1, 0.368627, 0, 0.490196)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5g85d"]
+size = Vector3(1, 2, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7g6j2"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="SpawnArquebusier" type="Node3D"]
+script = ExtResource("1_vxwf1")
+
+[node name="StartPoint" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_swc6d")
+mesh = SubResource("BoxMesh_5g85d")
+
+[node name="Flag1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Point" type="MeshInstance3D" parent="Flag1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_swc6d")
+mesh = SubResource("BoxMesh_7g6j2")
