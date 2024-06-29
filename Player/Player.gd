@@ -8,12 +8,12 @@ signal SignalHealth
 @onready var rayHook : RayCast3D = $TwistPivot/PitchPivot/Camera3D/RayCast3D
 @onready var interactRay : RayCast3D = $MeshInstance3D/InteractRay
 @onready var camera : Camera3D = $TwistPivot/PitchPivot/Camera3D
-@onready var model : MeshInstance3D = $MeshInstance3D
+@onready var model : Node3D = $MeshInstance3D
+@onready var animation_tree : AnimationTree = $MeshInstance3D/AnimationTree
 
 func _ready():
 	emit_signal("SignalHealth",health)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
 
 var delta:float
 func _physics_process(_delta):
@@ -23,56 +23,81 @@ func _physics_process(_delta):
 	RotateCamara()
 	InputHideMouse()
 	
-	InputHook()
-	InputMovement()
 	InputJump()
+	InputMovement()
+	InputHook()
 	
 	InputCameraMode()
 	
 	GetDrops()
 	move_and_slide()
-	
+	update_tree()
+	handle_animations()
 
 
-#region New Code Region
+#region Gravedad
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity_state : String = "Falling"
 var hook_position : Vector3
 func GravityManagement():
+
+
 	if gravity_state == "Falling":
 		velocity.y -= gravity * delta
+		anim_actual = FALL
+	
 	
 	if gravity_state == "Hooking":
+		anim_actual = HOOK
 		global_position = global_position.move_toward(hook_position,.2)
 		if (global_position - hook_position).length() < .095:
 			gravity_state = "Falling"
+	
+	if is_on_floor():
+		anim_actual = IDLE
+
+
 #endregion
 
 
-#region New Code Region
+#region Salto
+
+
 var jump_velocity := 3.5
 func InputJump():
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_on_floor():
 			velocity.y = jump_velocity
+		
 		if gravity_state == "Hooking":
 			gravity_state = "Falling"
 			velocity.y = jump_velocity * 2.5
+
+
 #endregion
 
 
-#region New Code Region
+#region Input del hook
+
+@onready var gancho:Node3D = $FreeGancho/Hook
 func InputHook():
 	if Input.is_action_just_pressed("hook"):
 		if rayHook.is_colliding():
 			gravity_state = "Hooking"
 			hook_position = rayHook.get_collision_point()
+			gancho.global_position = global_position
+			gancho.look_at(hook_position,Vector3.UP,true)
+			gancho.global_position = hook_position
 		else:
 			gravity_state = "Falling"
+
+
 #endregion
 
 
-#region New Code Region
+#region Input del movimiento
+
+
 var input_dir : Vector2
 var direction : Vector3
 var speed := 5.0
@@ -83,13 +108,17 @@ func InputMovement():
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+		if is_on_floor():
+			anim_actual = RUN
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+
+
 #endregion
 
 
-#region New Code Region
+#region Ocultar desocultar puntero
 func InputHideMouse():
 	if Input.is_action_just_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
@@ -127,17 +156,20 @@ func InputCameraMode():
 		if input_dir != Vector2.ZERO:
 			model.rotation.y = lerp_angle(model.rotation.y,atan2(-direction.x,-direction.z),.3)
 			
-		if camera.position.z < 3.9:
+		if camera.position.z < 4.9:
 			speed = 5.0
-			camera.position = lerp(camera.position,Vector3(0,2.5,4),.1)
+			camera.position = lerp(camera.position,Vector3(0,2,5),.1)
 	
-	if apuntando:
+	if apuntando and is_on_floor():
+		
+		anim_actual = AIM
 		model.rotation.y = lerp_angle(model.rotation.y,twist_pivot.rotation.y,.3)
 		if camera.position.z > 1.7:
 			speed = 2.0
-			camera.position = lerp(camera.position,Vector3(1.3,2,1.6),.1)
+			camera.position = lerp(camera.position,Vector3(1,1,1),.1)
 #endregion
 
+#region Recibir daño
 
 var health := 5
 func GetDamage(damage:int):
@@ -151,6 +183,9 @@ func GetDamage(damage:int):
 		health = 5
 	emit_signal("SignalHealth",health)
 
+#endregion
+
+#region Obtener drops del suelo
 
 func GetDrops():
 	if interactRay.is_colliding():
@@ -171,9 +206,41 @@ func GetDrops():
 	else:
 		$Label.visible = false
 
+#endregion
 
+#region Animaciones
 
+enum {IDLE, RUN, HOOK, AIM, FALL}
+var anim_actual := IDLE
+var blend_speed := 15
 
+var Movement := 0.0
+var States := 0.0
+var FallHook := 0.0
+func update_tree():
+	animation_tree["parameters/Movement/blend_amount"] = Movement
+	animation_tree["parameters/States/blend_amount"] = States
+	animation_tree["parameters/FallHook/blend_amount"] = FallHook
+
+func handle_animations():
+	match anim_actual:
+		RUN:
+			Movement = lerpf(Movement,-1,blend_speed*delta)
+			States = lerpf(States,0,blend_speed*delta)
+		IDLE:
+			Movement = lerpf(Movement,0,blend_speed*delta)
+			States = lerpf(States,0,blend_speed*delta)
+		AIM:
+			Movement = lerpf(Movement,1,blend_speed*delta)
+			States = lerpf(States,0,blend_speed*delta)
+		FALL:
+			FallHook = lerpf(FallHook,1,blend_speed*delta)
+			States = lerpf(States,1,blend_speed*delta)
+		HOOK:
+			FallHook = lerpf(Movement,1,blend_speed*delta)
+			States = lerpf(States,1,blend_speed*delta)
+
+#endregion
 
 
 
