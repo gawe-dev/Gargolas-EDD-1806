@@ -3,7 +3,7 @@ extends CharacterBody3D
 @onready var climb_ray:RayCast3D = $LowBody/ClimbRay
 @onready var high_body:Node3D = $HighBody
 @onready var timer : Timer = $Timer
-@onready var bullet : Node3D = $HighBody/MeshGun/Bullet
+@onready var bullet : Node3D = $HighBody/MeshGun/NecessaryNode/Bullet
 
 var target:Node3D
 var drops:Node
@@ -93,7 +93,7 @@ func AimAndShoot():
 
 func ShootOrReload():
 	if not reloading:
-		bullet.shootBullet()
+		bullet.shootBullet(target.global_position)
 		can_shoot = false
 		reloading = true
 		timer.wait_time = 5

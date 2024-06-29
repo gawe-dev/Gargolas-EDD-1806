@@ -2,21 +2,15 @@
 
 [ext_resource type="Script" path="res://Musketeer/Musketeer.gd" id="1_ued8u"]
 [ext_resource type="Script" path="res://Musketeer/MusketeerBullet.gd" id="2_4ywf7"]
+[ext_resource type="PackedScene" uid="uid://cub1uy7ivf4lf" path="res://@Commons/Blend/EnemigoInf.blend" id="2_275pn"]
+[ext_resource type="PackedScene" uid="uid://bnhigd2wme6oh" path="res://@Commons/Blend/EnemigoSup.blend" id="3_780i6"]
+[ext_resource type="PackedScene" uid="uid://dakpu5sabbcbx" path="res://@Commons/GLB/musket.glb" id="4_hr6q2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yctua"]
 radius = 0.25
 
-[sub_resource type="BoxMesh" id="BoxMesh_ppp01"]
-size = Vector3(0.5, 1, 0.25)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3xpse"]
-size = Vector3(0.3, 0.3, 0.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8gi5g"]
-size = Vector3(0.4, 0.5, 0.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_aobbo"]
-size = Vector3(0.1, 0.1, 0.3)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0efjb"]
+albedo_color = Color(0.231373, 0.231373, 0.231373, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_nu7pp"]
 radius = 0.1
@@ -41,34 +35,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 target_position = Vector3(0, 0, 0.5)
 
-[node name="MeshLegs" type="MeshInstance3D" parent="LowBody"]
-mesh = SubResource("BoxMesh_ppp01")
-skeleton = NodePath("../..")
+[node name="EnemigoInf" parent="LowBody" instance=ExtResource("2_275pn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="HighBody" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="MeshHead" type="MeshInstance3D" parent="HighBody"]
-transform = Transform3D(1, 3.11218e-12, 0, 2.70006e-12, 1, 2.32831e-10, 5.82077e-11, 0, 1, 0, 0.25, 0)
-mesh = SubResource("BoxMesh_3xpse")
+[node name="EnemigoSup" parent="HighBody" instance=ExtResource("3_780i6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.468338, 0)
 
-[node name="MeshTrunk" type="MeshInstance3D" parent="HighBody"]
-transform = Transform3D(1, 3.11218e-12, 0, 2.55795e-12, 1, 9.31323e-10, 2.32831e-10, 0, 1, 0, -0.2, -0.1)
-mesh = SubResource("BoxMesh_8gi5g")
-
-[node name="MeshGun" type="MeshInstance3D" parent="HighBody"]
+[node name="MeshGun" type="Node3D" parent="HighBody"]
 transform = Transform3D(1, 3.11218e-12, 0, 2.67164e-12, 1, 3.49246e-10, 8.73115e-11, 0, 1, -0.177034, -0.0926874, 0.422846)
-mesh = SubResource("BoxMesh_aobbo")
 
-[node name="Bullet" type="Area3D" parent="HighBody/MeshGun"]
-transform = Transform3D(1, 0, 0, -3.04932e-20, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="musket" parent="HighBody/MeshGun" instance=ExtResource("4_hr6q2")]
+transform = Transform3D(-2, 0, 3.01992e-07, 1.45895e-19, 2, 0, -3.01992e-07, -3.61222e-27, -2, -0.0626183, 0.119039, 0.128995)
+
+[node name="NecessaryNode" type="Node" parent="HighBody/MeshGun"]
+editor_description = "Este nodo es necesario para que la bala funcione globalmente y no con la posición inherit"
+
+[node name="Bullet" type="Area3D" parent="HighBody/MeshGun/NecessaryNode"]
+transform = Transform3D(1, 3.11218e-12, 0, 2.67164e-12, 1, 3.49246e-10, 8.73115e-11, 0, 1, -0.238825, 1.53585, 0.778425)
+visible = false
+collision_layer = 0
+monitorable = false
 script = ExtResource("2_4ywf7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="HighBody/MeshGun/Bullet"]
+[node name="MeshBullet" type="MeshInstance3D" parent="HighBody/MeshGun/NecessaryNode/Bullet"]
 transform = Transform3D(1, 0, 0, -3.04932e-20, 1, 0, 0, 0, 1, 0, 0, 0.0605396)
+material_override = SubResource("StandardMaterial3D_0efjb")
 mesh = SubResource("SphereMesh_nu7pp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HighBody/MeshGun/Bullet"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HighBody/MeshGun/NecessaryNode/Bullet"]
 shape = SubResource("SeparationRayShape3D_safmi")
 
 [node name="Timer" type="Timer" parent="."]
