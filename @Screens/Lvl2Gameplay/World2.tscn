@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyhp23o3d7744"]
+
+[ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="1_hfud2"]
+[ext_resource type="PackedScene" uid="uid://dyqj3jg8ffx7r" path="res://@Commons/GLB/recova._1.glb" id="2_w8812"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6f1m2"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fidue"]
+sky_material = SubResource("ProceduralSkyMaterial_6f1m2")
+
+[sub_resource type="Environment" id="Environment_tawx4"]
+background_mode = 2
+sky = SubResource("Sky_fidue")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqgu5"]
+albedo_color = Color(0.501961, 0.360784, 0.223529, 1)
+
+[node name="World2" type="Node"]
+
+[node name="env" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+environment = SubResource("Environment_tawx4")
+
+[node name="StaticBodies" type="Node" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="StaticBodies"]
+material_override = SubResource("StandardMaterial3D_rqgu5")
+use_collision = true
+size = Vector3(1000, 1, 1000)
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("1_hfud2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.964722, 5.69402, 5.2898)
+
+[node name="recova__1" parent="." instance=ExtResource("2_w8812")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0546, 0, 0.65307)
