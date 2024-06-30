@@ -1,31 +1,54 @@
 extends Area3D
 
-const RANGE :int = 30
-const DAMAGE:int = 2
-var shooted:bool = false
+
+const RANGE  : int = 30
+const DAMAGE : int = 2
+var velocity : int = 0 ## valor original en el método "activar()"
+var shooted : bool = false
+
 
 func _ready():
 	connect("body_entered",hit_entered)
+	
+
 
 func _process(delta):
 	if shooted:
-		global_position.x += global_basis.z.x * 20 * delta
-		global_position.y += global_basis.z.y * 20 * delta
-		global_position.z += global_basis.z.z * 20 * delta
-	if (Vector3.ZERO - position).length() > RANGE:
-		initial()
+		global_position.x += global_basis.z.x * velocity * delta
+		global_position.y += global_basis.z.y * velocity * delta
+		global_position.z += global_basis.z.z * velocity * delta
+	if (initial_position - global_position).length() > RANGE:
+		desactivar()
 
 
-func shootBullet():
+func activar():
+	velocity = 15
+	visible = true
 	shooted = true
+	set_deferred("monitoring", true)
 
+func desactivar():
+	velocity = 0
+	shooted = false
+	visible = false
+	set_deferred("monitoring", false)
+
+
+func shootBullet(target_position):
+	initial()
+	activar()
+	look_at(target_position, Vector3.UP, true)
+
+
+var initial_position : Vector3
 func initial():
-		shooted = false
-		position = Vector3.ZERO
+	initial_position = $"../..".global_position
+	global_position = initial_position
+
 
 func hit_entered(body:Node3D):
 	if shooted and not body.is_in_group("Enemy"):
-		initial()
 		if body.has_method("GetDamage"):
 			body.GetDamage(DAMAGE)
-	
+		desactivar()
+

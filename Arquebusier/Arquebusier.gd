@@ -1,9 +1,10 @@
 extends CharacterBody3D
 
-@onready var climb_ray:RayCast3D = $LowBody/ClimbRay
-@onready var high_body:Node3D = $HighBody
+@onready var climb_ray : RayCast3D = $LowBody/ClimbRay
+@onready var high_body : Node3D = $HighBody
 @onready var timer : Timer = $Timer
-@onready var bullet : Node3D = $HighBody/MeshGun/Bullet
+@onready var bullet : Node3D = $HighBody/MeshGun/NecessaryNode/Bullet
+@onready var animation : AnimationPlayer = $LowBody/EnemigoInf/AnimationPlayer
 
 var target:Node3D
 var drops:Node
@@ -52,19 +53,21 @@ func ManageGravity():
 		velocity.y = 2
 	if GravityState == GravityTypes.Infiltrating:
 		climb_ray.get_collider().GetDamage(1)
-		queue_free()
+		call_deferred("queue_free")
 
 
 var speed : float
 enum ForwardTypes { Walk, Stop }
-var ForwardMode : ForwardTypes
+var ForwardMode : ForwardTypes = ForwardTypes.Walk
 func ManageForward():
 	velocity.x = global_basis.z.x * speed
 	velocity.z = global_basis.z.z * speed
 	if ForwardMode == ForwardTypes.Walk:
 		speed = 1
+		animation.play("Walk")
 	if ForwardMode == ForwardTypes.Stop:
 		speed = 0
+		animation.play("Idle")
 
 
 var reloading : bool = false
@@ -91,9 +94,11 @@ func AimAndShoot():
 		can_shoot = false
 		timer.start()
 
+
+var shoot_target:Vector3 = Vector3.ZERO
 func ShootOrReload():
 	if not reloading:
-		bullet.shootBullet()
+		bullet.shootBullet(shoot_target)
 		can_shoot = false
 		reloading = true
 		timer.wait_time = 5
@@ -153,6 +158,7 @@ func UpdateCurrentBarricade():
 		if barricade_in_range and barricades[current_barricade].name.contains("Down"):
 			current_barricade += 1
 
+
 enum GravityTypes { Falling, Climbing, Infiltrating }
 var GravityState:GravityTypes
 func SensorClimb():
@@ -164,17 +170,24 @@ func SensorClimb():
 	else:
 		GravityState = GravityTypes.Falling
 
+
 var target_in_range := false
 var barricade_in_range := false
 func SensorPrepareAim():
 	
 	target_in_range = (global_position - target.global_position).length() < (bullet.RANGE - 5)
 	
-	
-	if current_barricade < barricades.size()-1:
-		barricade_in_range = (global_position - barricades[current_barricade].global_position).length() < bullet.RANGE
+	if target_in_range:
+		shoot_target = target.global_position
 	else:
-		barricade_in_range = (global_position - barricadeFinal.global_position).length() < bullet.RANGE
+		if current_barricade < barricades.size()-1:
+			shoot_target = barricades[current_barricade].global_position
+			barricade_in_range = (global_position - barricades[current_barricade].global_position).length() < (bullet.RANGE -5)
+		else:
+			shoot_target = barricadeFinal.global_position
+			barricade_in_range = (global_position - barricadeFinal.global_position).length() < (bullet.RANGE -5)
+	
+
 
 #endregion
 
@@ -187,7 +200,7 @@ func GetDamage(damage:int):
 	health -= damage
 	if health <= 0:
 		drops.createDrop(global_position)
-		queue_free()
+		call_deferred("queue_free")
 
 
 #endregion

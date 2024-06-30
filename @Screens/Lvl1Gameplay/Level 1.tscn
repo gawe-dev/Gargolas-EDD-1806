@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d2sj1dne5pq2b"]
+[gd_scene load_steps=21 format=3 uid="uid://d2sj1dne5pq2b"]
 
 [ext_resource type="PackedScene" uid="uid://bo24dt5p27wq3" path="res://Staticbodies/Ground/Ground.tscn" id="1_2rdhq"]
 [ext_resource type="PackedScene" uid="uid://dqdau0k3eifk1" path="res://TroopManagement/TroopManagement.tscn" id="2_gwk67"]
@@ -35,6 +35,13 @@ transparency = 1
 albedo_color = Color(1, 0.368627, 0, 0.490196)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7g6j2"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s1ew3"]
+transparency = 1
+albedo_color = Color(1, 0.368627, 0, 0.490196)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d51cr"]
 size = Vector3(0.1, 0.1, 0.1)
 
 [node name="Level 1" type="Node"]
@@ -122,6 +129,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 material_override = SubResource("StandardMaterial3D_v4piu")
 mesh = SubResource("BoxMesh_2qrpk")
 
+[node name="SpawnArquebusier" parent="TroopManagement/Wave0" index="1" instance=ExtResource("7_0glet")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05413, 0, 0)
+
+[node name="Flag2" type="Node3D" parent="TroopManagement/Wave0/SpawnArquebusier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0776143, -1.90735e-06, 24.4689)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave0/SpawnArquebusier/Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_swc6d")
+mesh = SubResource("BoxMesh_7g6j2")
+
 [node name="Wave1" type="Node3D" parent="TroopManagement"]
 
 [node name="SpawnMusketeer" parent="TroopManagement/Wave1" instance=ExtResource("4_ugao0")]
@@ -186,24 +204,24 @@ laneAttack = "Left"
 
 [node name="Cover" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier2/Flag1" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26859, 0.05, 8.82946)
-material_override = SubResource("StandardMaterial3D_swc6d")
-mesh = SubResource("BoxMesh_7g6j2")
+material_override = SubResource("StandardMaterial3D_s1ew3")
+mesh = SubResource("BoxMesh_d51cr")
 
 [node name="Flag2" type="Node3D" parent="TroopManagement/Wave2/SpawnArquebusier2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43297, 0, 10.7783)
 
 [node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier2/Flag2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-material_override = SubResource("StandardMaterial3D_swc6d")
-mesh = SubResource("BoxMesh_7g6j2")
+material_override = SubResource("StandardMaterial3D_s1ew3")
+mesh = SubResource("BoxMesh_d51cr")
 
 [node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave2/SpawnArquebusier2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66475, 0, 41.9774)
 
 [node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier2/FlagFinal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-material_override = SubResource("StandardMaterial3D_swc6d")
-mesh = SubResource("BoxMesh_7g6j2")
+material_override = SubResource("StandardMaterial3D_s1ew3")
+mesh = SubResource("BoxMesh_d51cr")
 
 [node name="SpawnMusketeer2" parent="TroopManagement/Wave2" instance=ExtResource("4_ugao0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4791, 0, 0)
@@ -262,24 +280,24 @@ laneAttack = "Right"
 
 [node name="Cover1" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier/Flag1" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.75416, 0.0499991, 9.32792)
-material_override = SubResource("StandardMaterial3D_swc6d")
-mesh = SubResource("BoxMesh_7g6j2")
+material_override = SubResource("StandardMaterial3D_s1ew3")
+mesh = SubResource("BoxMesh_d51cr")
 
 [node name="Flag2" type="Node3D" parent="TroopManagement/Wave2/SpawnArquebusier"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11224, 0, 11.2201)
 
 [node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier/Flag2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-material_override = SubResource("StandardMaterial3D_swc6d")
-mesh = SubResource("BoxMesh_7g6j2")
+material_override = SubResource("StandardMaterial3D_s1ew3")
+mesh = SubResource("BoxMesh_d51cr")
 
 [node name="FlagFinal" type="Node3D" parent="TroopManagement/Wave2/SpawnArquebusier"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.64666, 0, 45.0891)
 
 [node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave2/SpawnArquebusier/FlagFinal"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-material_override = SubResource("StandardMaterial3D_swc6d")
-mesh = SubResource("BoxMesh_7g6j2")
+material_override = SubResource("StandardMaterial3D_s1ew3")
+mesh = SubResource("BoxMesh_d51cr")
 
 [node name="Left" type="Node" parent="."]
 
@@ -322,6 +340,7 @@ unique_name_in_owner = true
 
 [editable path="TroopManagement"]
 [editable path="TroopManagement/Wave0/SpawnMusketeer"]
+[editable path="TroopManagement/Wave0/SpawnArquebusier"]
 [editable path="TroopManagement/Wave1/SpawnMusketeer"]
 [editable path="TroopManagement/Wave1/SpawnMusketeer2"]
 [editable path="TroopManagement/Wave2/SpawnArquebusier2"]
