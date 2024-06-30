@@ -53,7 +53,7 @@ func ManageGravity():
 		velocity.y = 2
 	if GravityState == GravityTypes.Infiltrating:
 		climb_ray.get_collider().GetDamage(1)
-		queue_free()
+		call_deferred("queue_free")
 
 
 var speed : float
@@ -177,16 +177,15 @@ func SensorPrepareAim():
 	
 	target_in_range = (global_position - target.global_position).length() < (bullet.RANGE - 5)
 	
-	
 	if target_in_range:
 		shoot_target = target.global_position
 	else:
 		if current_barricade < barricades.size()-1:
 			shoot_target = barricades[current_barricade].global_position
-			barricade_in_range =  (global_position - barricades[current_barricade].global_position).length() < bullet.RANGE
+			barricade_in_range = (global_position - barricades[current_barricade].global_position).length() < (bullet.RANGE -5)
 		else:
 			shoot_target = barricadeFinal.global_position
-			barricade_in_range = (global_position - barricadeFinal.global_position).length() < bullet.RANGE
+			barricade_in_range = (global_position - barricadeFinal.global_position).length() < (bullet.RANGE -5)
 	
 
 
@@ -201,7 +200,7 @@ func GetDamage(damage:int):
 	health -= damage
 	if health <= 0:
 		drops.createDrop(global_position)
-		queue_free()
+		call_deferred("queue_free")
 
 
 #endregion

@@ -8,6 +8,7 @@ signal SignalHealth
 @onready var rayHook : RayCast3D = $TwistPivot/PitchPivot/Camera3D/RayCast3D
 @onready var interactRay : RayCast3D = $MeshInstance3D/InteractRay
 @onready var camera : Camera3D = $TwistPivot/PitchPivot/Camera3D
+
 @onready var model : Node3D = $MeshInstance3D
 @onready var animation_tree : AnimationTree = $MeshInstance3D/AnimationTree
 
@@ -191,13 +192,13 @@ func GetDrops():
 	if interactRay.is_colliding():
 		if interactRay.get_collider().name.contains("DropMusket"):
 			$MeshInstance3D/WeaponsManager.AddAmmo("GunMusket")
-			interactRay.get_collider().queue_free()
+			interactRay.get_collider().call_deferred("queue_free")
 		if interactRay.get_collider().name.contains("DropArquebus"):
 			$MeshInstance3D/WeaponsManager.AddAmmo("GunArquebus")
-			interactRay.get_collider().queue_free()
+			interactRay.get_collider().call_deferred("queue_free")
 		if interactRay.get_collider().name.contains("DropMate"):
 			health = 5
-			interactRay.get_collider().queue_free()
+			interactRay.get_collider().call_deferred("queue_free")
 	
 	if interactRay.is_colliding() and interactRay.get_collider().has_method("Interact"):
 		$Label.visible = true

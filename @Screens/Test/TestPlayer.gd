@@ -1,5 +1,7 @@
 extends Node3D
 
+@onready var collision:CollisionShape3D = $CollisionShape3D
+
 var vida:int = 10
 
 func GetDamage(damage:int):
@@ -7,5 +9,5 @@ func GetDamage(damage:int):
 	vida -= damage
 	if vida < 0 :
 		name += "Down"
-		$CollisionShape3D.disabled = true
+		collision.set_deferred("disabled",true)
 		$MeshInstance3D.visible = false
