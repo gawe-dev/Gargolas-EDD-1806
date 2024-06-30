@@ -19,10 +19,15 @@ func _ready():
 var delta:float
 func _physics_process(_delta):
 	delta = _delta
+	InputHideMouse()
+	update_tree()
+	handle_animations()
+	if health <= 5:
+		DERROTA()
+	
 	GravityManagement()
 	
 	RotateCamara()
-	InputHideMouse()
 	
 	InputJump()
 	InputMovement()
@@ -32,8 +37,6 @@ func _physics_process(_delta):
 	
 	GetDrops()
 	move_and_slide()
-	update_tree()
-	handle_animations()
 
 
 #region Gravedad
@@ -56,6 +59,7 @@ func GravityManagement():
 	
 	if is_on_floor():
 		anim_actual = IDLE
+	
 
 
 #endregion
@@ -168,20 +172,18 @@ func InputCameraMode():
 		if camera.position.z > 1.7:
 			speed = 2.0
 			camera.position = lerp(camera.position,Vector3(1,1,1),.1)
+		
 #endregion
 
 #region Recibir daño
 
-var health := 5
+var health := 10
 func GetDamage(damage:int):
 	health -= damage
 	if health <= 0:
 		gravity_state = "Falling"
 		#dropear
-		position.x = 0
-		position.y = 2.5
-		position.z = 22
-		health = 5
+		
 	emit_signal("SignalHealth",health)
 
 #endregion
@@ -197,7 +199,7 @@ func GetDrops():
 			$MeshInstance3D/WeaponsManager.AddAmmo("GunArquebus")
 			interactRay.get_collider().call_deferred("queue_free")
 		if interactRay.get_collider().name.contains("DropMate"):
-			health = 5
+			health += 10
 			interactRay.get_collider().call_deferred("queue_free")
 	
 	if interactRay.is_colliding() and interactRay.get_collider().has_method("Interact"):
@@ -211,7 +213,7 @@ func GetDrops():
 
 #region Animaciones
 
-enum {IDLE, RUN, HOOK, AIM, FALL}
+enum {IDLE, RUN, HOOK, AIM, FALL, DEATH}
 var anim_actual := IDLE
 var blend_speed := 15
 
@@ -234,14 +236,25 @@ func handle_animations():
 		AIM:
 			Movement = lerpf(Movement,1,blend_speed*delta)
 			States = lerpf(States,0,blend_speed*delta)
+		DEATH:
+			FallHook = lerpf(FallHook,-1,blend_speed*delta)
+			States = lerpf(States,1,blend_speed*delta)
 		FALL:
-			FallHook = lerpf(FallHook,1,blend_speed*delta)
+			FallHook = lerpf(FallHook,0,blend_speed*delta)
 			States = lerpf(States,1,blend_speed*delta)
 		HOOK:
-			FallHook = lerpf(Movement,1,blend_speed*delta)
+			FallHook = lerpf(FallHook,1,blend_speed*delta)
 			States = lerpf(States,1,blend_speed*delta)
-
+	
 #endregion
 
-
+var lose := false
+func DERROTA():
+	if lose:
+		anim_actual = DEATH
+		$CanvasLayer.visible = false
+		if not $ResetMenu/ColorRect/Win.visible:
+			$ResetMenu.visible = true
+			$ResetMenu/ColorRect/Lose.visible = true
+		return
 
