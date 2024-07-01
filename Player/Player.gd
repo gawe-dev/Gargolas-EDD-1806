@@ -177,7 +177,7 @@ func InputCameraMode():
 
 #region Recibir daño
 
-var health := 10
+var health := 25
 func GetDamage(damage:int):
 	health -= damage
 	if health <= 0:
@@ -194,13 +194,16 @@ func GetDrops():
 	if interactRay.is_colliding():
 		if interactRay.get_collider().name.contains("DropMusket"):
 			$MeshInstance3D/WeaponsManager.AddAmmo("GunMusket")
-			interactRay.get_collider().call_deferred("queue_free")
+			interactRay.get_collider().queue_free()
 		if interactRay.get_collider().name.contains("DropArquebus"):
 			$MeshInstance3D/WeaponsManager.AddAmmo("GunArquebus")
-			interactRay.get_collider().call_deferred("queue_free")
+			interactRay.get_collider().queue_free()
 		if interactRay.get_collider().name.contains("DropMate"):
-			health += 10
-			interactRay.get_collider().call_deferred("queue_free")
+			if health <= 25:
+				health += 5
+			else:
+				health = 25
+			interactRay.get_collider().queue_free()
 	
 	if interactRay.is_colliding() and interactRay.get_collider().has_method("Interact"):
 		$Label.visible = true

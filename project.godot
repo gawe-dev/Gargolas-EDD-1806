@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Gárgolas EDD - 1806"
-run/main_scene="res://@Screens/Intro/Intro.tscn"
+run/main_scene="res://@Screens/Lvl2Gameplay/World2.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
