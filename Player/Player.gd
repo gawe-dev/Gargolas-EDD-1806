@@ -68,7 +68,7 @@ func GravityManagement():
 #region Salto
 
 
-var jump_velocity := 3.5
+var jump_velocity := 5
 func InputJump():
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_on_floor():
@@ -76,7 +76,7 @@ func InputJump():
 		
 		if gravity_state == "Hooking":
 			gravity_state = "Falling"
-			velocity.y = jump_velocity * 2.5
+			velocity.y = jump_velocity * 1.8
 
 
 #endregion
