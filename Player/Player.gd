@@ -17,14 +17,17 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 var delta:float
-var lose :bool = false
+
 func _physics_process(_delta):
 	delta = _delta
 	InputHideMouse()
 	update_tree()
 	handle_animations()
-	if health <= 0 or lose:
-		camera.position = lerp(camera.position,Vector3(0,2,5),.1)
+	if Global.win:
+		camera.position = lerp(camera.position,Vector3(0,2,6),.1)
+		VICTORIA()
+	elif health <= 0 or Global.lose:
+		camera.position = lerp(camera.position,Vector3(0,2,6),.1)
 		DERROTA()
 		return
 	
@@ -260,4 +263,11 @@ func DERROTA():
 	if not $ResetMenu/ColorRect/Win.visible:
 		$ResetMenu.visible = true
 		$ResetMenu/ColorRect/Lose.visible = true
+
+func VICTORIA():
+	anim_actual = IDLE
+	$CanvasLayer.visible = false
+	if not $ResetMenu/ColorRect/Lose.visible:
+		$ResetMenu.visible = true
+		$ResetMenu/ColorRect/Win.visible = true
 

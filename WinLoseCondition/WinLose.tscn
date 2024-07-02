@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://c45cwd7u7i64m"]
+
+[ext_resource type="Script" path="res://WinLoseCondition/WinLose.gd" id="1_xmtih"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_6qjuu"]
+length = 3.79956
+
+[node name="LoseArea" type="Area3D"]
+monitorable = false
+script = ExtResource("1_xmtih")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SeparationRayShape3D_6qjuu")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -27.0
+offset_right = -1.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_top = -67.0
+offset_right = 0.5
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Vida Barricada Recova"
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

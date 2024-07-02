@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dyhp23o3d7744"]
+[gd_scene load_steps=17 format=3 uid="uid://dyhp23o3d7744"]
 
 [ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="1_hfud2"]
 [ext_resource type="PackedScene" uid="uid://dns7e42aaycbw" path="res://@Commons/Blend/Cabildo.blend" id="2_0ibpx"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://chm4kk02d5snm" path="res://Barrel/Barrel.tscn" id="7_tgot8"]
 [ext_resource type="PackedScene" uid="uid://dhx4m4bykwvss" path="res://Staticbodies/Barricade/Barricade.tscn" id="8_cd6rf"]
 [ext_resource type="PackedScene" uid="uid://da3mrwopjx8ek" path="res://@Commons/Blend/Recova.blend" id="9_x5wlf"]
+[ext_resource type="PackedScene" uid="uid://dqdau0k3eifk1" path="res://TroopManagement/TroopManagement.tscn" id="10_73p5u"]
+[ext_resource type="PackedScene" uid="uid://c6lmichtnv4av" path="res://Drops/PlacementDrop.tscn" id="11_fytew"]
+[ext_resource type="PackedScene" uid="uid://c45cwd7u7i64m" path="res://WinLoseCondition/WinLose.tscn" id="12_0f3md"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6f1m2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -143,6 +146,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.21089, 0.500001, -15.7316)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.56211, 0.500001, -16.3687)
 
 [node name="Player" parent="." instance=ExtResource("1_hfud2")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.84193, 21.5065, -99.0361)
 
 [node name="Left" type="Node" parent="."]
@@ -175,3 +179,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -28.9781)
 
 [node name="Recova2" parent="." instance=ExtResource("9_x5wlf")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -48)
+
+[node name="TroopManagement" parent="." instance=ExtResource("10_73p5u")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.623463, 0.500015, 44.6908)
+
+[node name="Flag1" parent="TroopManagement/Wave0/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.71556e-06, 0, 113.194)
+
+[node name="Drops" parent="." instance=ExtResource("11_fytew")]
+unique_name_in_owner = true
+
+[node name="LoseArea" parent="." instance=ExtResource("12_0f3md")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.32986, 0.809474, 24.3779)
+
+[editable path="TroopManagement"]
+[editable path="TroopManagement/Wave0/SpawnMusketeer"]

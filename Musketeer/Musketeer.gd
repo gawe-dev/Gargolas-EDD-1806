@@ -15,6 +15,7 @@ var barricades:Array[Node3D]
 var barricadeFinal:Node3D
 
 func _ready():
+	Global.enemigos_vivos += 1
 	##Obtener todas las banderas del spawn de esta instancia
 	for node in get_parent().find_children("Flag*", "Node3D",false):
 		flags.push_back(node)
@@ -38,10 +39,10 @@ func _physics_process(_delta):
 	ManageForward()
 	ManageDuty()
 	ManageRoute()
-	move_and_slide()
 	UpdateCurrentBarricade()
 	SensorClimb()
 	SensorPrepareAim()
+	move_and_slide()
 
 #region Management
 
@@ -52,8 +53,8 @@ func ManageGravity():
 	if GravityState == GravityTypes.Climbing:
 		velocity.y = 2
 	if GravityState == GravityTypes.Infiltrating:
+		GetDamage(10)
 		climb_ray.get_collider().GetDamage(1)
-		call_deferred("queue_free")
 
 
 var speed : float
@@ -142,8 +143,7 @@ func NextFlagOrDie():
 	if (global_position - flags[current_flag].global_position).length() < 1:
 		if current_flag + 1 < flags.size():
 			current_flag += 1
-		else:
-			queue_free()
+		
 
 #endregion
 
@@ -200,7 +200,9 @@ func GetDamage(damage:int):
 	health -= damage
 	if health <= 0:
 		drops.createDrop(global_position)
-		call_deferred("queue_free")
+		queue_free()
+		Global.enemigos_vivos -= 1
+	
 
 
 #endregion
