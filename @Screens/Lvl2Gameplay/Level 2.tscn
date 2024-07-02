@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://r4t2o2xtvedi" path="res://@Commons/Blend/CasaL.blend" id="4_qdj53"]
 [ext_resource type="PackedScene" uid="uid://cudmn4tk0gdrf" path="res://@Commons/Blend/CasaS.blend" id="5_ohi0k"]
 [ext_resource type="PackedScene" uid="uid://hwtyetar2ijw" path="res://Boiler/Boiler.tscn" id="6_3452x"]
-[ext_resource type="PackedScene" uid="uid://bkc3ypn6x32cx" path="res://@Commons/Blend/Barril.blend" id="6_pd58o"]
+[ext_resource type="PackedScene" uid="uid://chm4kk02d5snm" path="res://Barrel/Barrel.tscn" id="7_tgot8"]
 [ext_resource type="PackedScene" uid="uid://dhx4m4bykwvss" path="res://Staticbodies/Barricade/Barricade.tscn" id="8_cd6rf"]
 [ext_resource type="PackedScene" uid="uid://da3mrwopjx8ek" path="res://@Commons/Blend/Recova.blend" id="9_x5wlf"]
 
@@ -97,9 +97,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5251, 0.499995, -30.4667)
 [node name="CasaS7" parent="StaticBodies" instance=ExtResource("5_ohi0k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5251, 0.499995, -19.0809)
 
-[node name="Barril2" parent="StaticBodies" instance=ExtResource("6_pd58o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1847, 0.5, 7.04753)
-
 [node name="CasaE4" parent="StaticBodies" instance=ExtResource("3_5epdt")]
 transform = Transform3D(1, 0, -7.10543e-15, 0, 1, 0, 7.10543e-15, 0, 1, 29.2719, 0.5, 17.3138)
 
@@ -124,27 +121,29 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.885
 [node name="CasaS6" parent="StaticBodies" instance=ExtResource("5_ohi0k")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -10.5366, 0.499995, 10.9437)
 
-[node name="Barril3" parent="StaticBodies" instance=ExtResource("6_pd58o")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 14.3612, 0.5, 6.57092)
-
-[node name="Barril4" parent="StaticBodies" instance=ExtResource("6_pd58o")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.33724, 0.5, -16.42)
-
-[node name="Barril5" parent="StaticBodies" instance=ExtResource("6_pd58o")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -6.6205, 0.5, -15.4756)
-
 [node name="Boiler" parent="StaticBodies" instance=ExtResource("6_3452x")]
-transform = Transform3D(-0.843794, 0, 0.536667, 0, 1, 0, -0.536667, 0, -0.843794, -27.4877, 6.45847, 22.7954)
+transform = Transform3D(-0.843794, 0, 0.536667, 0, 1, 0, -0.536667, 0, -0.843794, -27.4957, 6.13266, 22.4803)
 
 [node name="Boiler2" parent="StaticBodies" instance=ExtResource("6_3452x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.95671, 4.40956, 10.6954)
+transform = Transform3D(0.785112, 0, 0.619354, 0, 1, 0, -0.619354, 0, 0.785112, 5.83719, 3.52911, 4.54223)
 
 [node name="Boiler3" parent="StaticBodies" instance=ExtResource("6_3452x")]
-transform = Transform3D(0.89678, 0, 0.442477, 0, 1, 0, -0.442477, 0, 0.89678, 27.7949, 4.40956, 26.8991)
+transform = Transform3D(0.999837, 0, 0.0180636, 0, 1, 0, -0.0180636, 0, 0.999837, 26.046, 4.10437, 26.8991)
+
+[node name="Barrel" parent="StaticBodies" instance=ExtResource("7_tgot8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0326, 1, 7.05877)
+
+[node name="Barrel4" parent="StaticBodies" instance=ExtResource("7_tgot8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8324, 1, 7.05877)
+
+[node name="Barrel2" parent="StaticBodies" instance=ExtResource("7_tgot8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.21089, 0.500001, -15.7316)
+
+[node name="Barrel3" parent="StaticBodies" instance=ExtResource("7_tgot8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.56211, 0.500001, -16.3687)
 
 [node name="Player" parent="." instance=ExtResource("1_hfud2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.84193, 21.5065, -99.0361)
-metadata/_edit_lock_ = true
 
 [node name="Left" type="Node" parent="."]
 
@@ -152,7 +151,7 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5143, 0.5, 17.4745)
 
 [node name="Barricade4" parent="Left" instance=ExtResource("8_cd6rf")]
-transform = Transform3D(0.773055, 0, -0.634339, 0, 1, 0, 0.634339, 0, 0.773055, -15.2954, 0.5, -14.8607)
+transform = Transform3D(0.953381, 0, -0.301771, 0, 1, 0, 0.301771, 0, 0.953381, -20.7929, 0.5, -5.35755)
 
 [node name="Mid" type="Node" parent="."]
 

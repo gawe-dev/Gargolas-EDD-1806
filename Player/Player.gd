@@ -17,13 +17,16 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 var delta:float
+var lose :bool = false
 func _physics_process(_delta):
 	delta = _delta
 	InputHideMouse()
 	update_tree()
 	handle_animations()
-	if health <= 5:
+	if health <= 0 or lose:
+		camera.position = lerp(camera.position,Vector3(0,2,5),.1)
 		DERROTA()
+		return
 	
 	GravityManagement()
 	
@@ -44,8 +47,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var gravity_state : String = "Falling"
 var hook_position : Vector3
 func GravityManagement():
-
-
+	
+	
 	if gravity_state == "Falling":
 		velocity.y -= gravity * delta
 		anim_actual = FALL
@@ -251,13 +254,10 @@ func handle_animations():
 	
 #endregion
 
-var lose := false
 func DERROTA():
-	if lose:
-		anim_actual = DEATH
-		$CanvasLayer.visible = false
-		if not $ResetMenu/ColorRect/Win.visible:
-			$ResetMenu.visible = true
-			$ResetMenu/ColorRect/Lose.visible = true
-		return
+	anim_actual = DEATH
+	$CanvasLayer.visible = false
+	if not $ResetMenu/ColorRect/Win.visible:
+		$ResetMenu.visible = true
+		$ResetMenu/ColorRect/Lose.visible = true
 
