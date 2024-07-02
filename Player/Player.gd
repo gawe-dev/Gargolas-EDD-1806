@@ -26,6 +26,7 @@ func _physics_process(_delta):
 	if Global.win:
 		camera.position = lerp(camera.position,Vector3(0,2,6),.1)
 		VICTORIA()
+		return
 	elif health <= 0 or Global.lose:
 		camera.position = lerp(camera.position,Vector3(0,2,6),.1)
 		DERROTA()
