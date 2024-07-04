@@ -54,7 +54,7 @@ func ManageGravity():
 		velocity.y = 2
 	if GravityState == GravityTypes.Infiltrating:
 		GetDamage(10)
-		#climb_ray.get_collider().GetDamage(1)
+		climb_ray.get_collider().GetDamage(1)
 
 
 var speed : float
@@ -102,10 +102,10 @@ func ShootOrReload():
 		bullet.shootBullet(shoot_target)
 		can_shoot = false
 		reloading = true
-		timer.wait_time = 5
+		timer.wait_time = 3
 		timer.start()
 	else:
-		timer.wait_time = 5
+		timer.wait_time = 3
 		can_shoot = true
 		reloading = false
 

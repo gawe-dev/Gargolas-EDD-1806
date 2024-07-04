@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://h2s6h3ff23vj"]
+[gd_scene load_steps=8 format=3 uid="uid://h2s6h3ff23vj"]
 
 [ext_resource type="Texture2D" uid="uid://nqhr5pcw81bu" path="res://@Screens/Menu/Menu.png" id="1_2koeo"]
 [ext_resource type="Script" path="res://@Screens/Menu/Menu.gd" id="1_fufnv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ccuqre1s0m5k2" path="res://@Commons/Images/Interfaz/Botones_STAR.png" id="3_tmji7"]
 [ext_resource type="Texture2D" uid="uid://cf3n20ri5i0lr" path="res://@Commons/Images/Interfaz/Info.png" id="5_8hhrh"]
 [ext_resource type="Texture2D" uid="uid://r4sghhfrdao7" path="res://@Commons/Images/Interfaz/Audio.png" id="6_aeqd0"]
+[ext_resource type="Texture2D" uid="uid://cejcox321e2i6" path="res://@Commons/Images/Interfaz/Info_1.png" id="7_wlahd"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -81,6 +82,28 @@ offset_bottom = 202.0
 icon = ExtResource("6_aeqd0")
 flat = true
 
+[node name="InfoHideButton" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="ImageBackground2" type="TextureRect" parent="InfoHideButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -580.0
+offset_top = -328.0
+offset_right = 572.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_wlahd")
+
 [connection signal="button_up" from="Button/Play" to="." method="_on_play_button_up"]
 [connection signal="button_up" from="Info" to="." method="_on_info_button_up"]
 [connection signal="button_up" from="Audio" to="." method="_on_audio_button_up"]
+[connection signal="button_up" from="InfoHideButton" to="." method="_on_info_hide_button_button_up"]

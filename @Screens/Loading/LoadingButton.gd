@@ -6,4 +6,4 @@ func _ready():
 	connect("button_up",ChangeScene)
 
 func ChangeScene():
-	get_tree().change_scene_to_file("res://@Screens/Lvl1Gameplay/Level 1.tscn")
+	get_tree().change_scene_to_file("res://@Screens/Lvl2Gameplay/Level 2.tscn")
