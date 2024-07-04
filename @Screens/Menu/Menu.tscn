@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://h2s6h3ff23vj"]
+[gd_scene load_steps=7 format=3 uid="uid://h2s6h3ff23vj"]
 
 [ext_resource type="Texture2D" uid="uid://nqhr5pcw81bu" path="res://@Screens/Menu/Menu.png" id="1_2koeo"]
 [ext_resource type="Script" path="res://@Screens/Menu/Menu.gd" id="1_fufnv"]
 [ext_resource type="AudioStream" uid="uid://d1mygedhxa0vx" path="res://@Screens/Menu/Menu.ogg" id="2_xkume"]
+[ext_resource type="Texture2D" uid="uid://ccuqre1s0m5k2" path="res://@Commons/Images/Interfaz/Botones_STAR.png" id="3_tmji7"]
+[ext_resource type="Texture2D" uid="uid://cf3n20ri5i0lr" path="res://@Commons/Images/Interfaz/Info.png" id="5_8hhrh"]
+[ext_resource type="Texture2D" uid="uid://r4sghhfrdao7" path="res://@Commons/Images/Interfaz/Audio.png" id="6_aeqd0"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -26,41 +29,58 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_2koeo")
 
-[node name="Play" type="Button" parent="."]
-layout_mode = 0
-offset_left = 182.0
-offset_top = 10.0
-offset_right = 334.0
-offset_bottom = 99.0
+[node name="Button" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -172.0
+offset_top = 123.0
+offset_right = 159.0
+offset_bottom = 309.0
+grow_horizontal = 2
+texture = ExtResource("3_tmji7")
+expand_mode = 1
+
+[node name="Play" type="Button" parent="Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -30.5
+offset_right = 42.5
+offset_bottom = 30.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 41
 text = "Jugar"
-
-[node name="Options" type="Button" parent="."]
-layout_mode = 0
-offset_left = 180.0
-offset_top = 136.0
-offset_right = 332.0
-offset_bottom = 225.0
-theme_override_font_sizes/font_size = 41
-text = "Galería
-"
+flat = true
 
 [node name="MusicBackground" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_xkume")
 autoplay = true
 
-[node name="Label" type="Label" parent="."]
+[node name="Info" type="Button" parent="."]
 layout_mode = 0
-offset_left = 85.0
-offset_top = -319.0
-offset_right = 409.0
-offset_bottom = -80.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 86
-text = "1806
-El juego"
-horizontal_alignment = 1
+offset_left = 432.0
+offset_top = 129.0
+offset_right = 520.0
+offset_bottom = 206.0
+icon = ExtResource("5_8hhrh")
+flat = true
 
-[connection signal="button_up" from="Play" to="." method="_on_play_button_up"]
-[connection signal="button_up" from="Options" to="." method="_on_options_button_up"]
+[node name="Audio" type="Button" parent="."]
+layout_mode = 0
+offset_left = -507.0
+offset_top = 126.0
+offset_right = -441.0
+offset_bottom = 202.0
+icon = ExtResource("6_aeqd0")
+flat = true
+
+[connection signal="button_up" from="Button/Play" to="." method="_on_play_button_up"]
+[connection signal="button_up" from="Info" to="." method="_on_info_button_up"]
+[connection signal="button_up" from="Audio" to="." method="_on_audio_button_up"]

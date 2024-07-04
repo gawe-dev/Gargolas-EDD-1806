@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c45cwd7u7i64m"]
+[gd_scene load_steps=4 format=3 uid="uid://c45cwd7u7i64m"]
 
 [ext_resource type="Script" path="res://WinLoseCondition/WinLose.gd" id="1_xmtih"]
+[ext_resource type="FontFile" uid="uid://dtl1re0ct6245" path="res://@Commons/Font/paradise_love/ParadiseLove.otf" id="2_0i1fi"]
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_6qjuu"]
 length = 3.79956
@@ -41,6 +42,8 @@ offset_right = -1.0
 offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_0i1fi")
+theme_override_font_sizes/font_size = 50
 
 [node name="Label2" type="Label" parent="Control"]
 layout_mode = 1
@@ -55,6 +58,11 @@ offset_right = 86.0
 offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.435294, 0.364706, 1)
+theme_override_colors/font_outline_color = Color(0.321569, 0.184314, 0.184314, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_0i1fi")
+theme_override_font_sizes/font_size = 50
 text = "Vida Barricada Recova"
 
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

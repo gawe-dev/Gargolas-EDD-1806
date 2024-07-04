@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://dyhp23o3d7744"]
+[gd_scene load_steps=22 format=3 uid="uid://dyhp23o3d7744"]
 
 [ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="1_hfud2"]
+[ext_resource type="AudioStream" uid="uid://bqpnh5sga6u8l" path="res://@Screens/Lvl2Gameplay/Gameplay.ogg" id="1_tbw7d"]
 [ext_resource type="PackedScene" uid="uid://dns7e42aaycbw" path="res://@Commons/Blend/Cabildo.blend" id="2_0ibpx"]
 [ext_resource type="PackedScene" uid="uid://d1xdseay0u3jk" path="res://@Commons/Blend/CasaE.blend" id="3_5epdt"]
 [ext_resource type="PackedScene" uid="uid://r4t2o2xtvedi" path="res://@Commons/Blend/CasaL.blend" id="4_qdj53"]
@@ -12,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://dqdau0k3eifk1" path="res://TroopManagement/TroopManagement.tscn" id="10_73p5u"]
 [ext_resource type="PackedScene" uid="uid://c6lmichtnv4av" path="res://Drops/PlacementDrop.tscn" id="11_fytew"]
 [ext_resource type="PackedScene" uid="uid://c45cwd7u7i64m" path="res://WinLoseCondition/WinLose.tscn" id="12_0f3md"]
+[ext_resource type="PackedScene" uid="uid://b63iywb03ygwr" path="res://MusketeerSpawner/SpawnMusketeer.tscn" id="12_xsm8x"]
+[ext_resource type="PackedScene" uid="uid://266hoadaaper" path="res://Staticbodies/Stair/Stair.tscn" id="15_qk3x4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6f1m2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -30,12 +33,22 @@ fog_height_density = 4.2222
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqgu5"]
 albedo_color = Color(0.501961, 0.360784, 0.223529, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4piu"]
+albedo_color = Color(0.5, 0, 0, 0.392157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2qrpk"]
+size = Vector3(0.1, 0.1, 0.1)
+
 [node name="World2" type="Node"]
 
 [node name="env" type="Node" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
 environment = SubResource("Environment_tawx4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="env"]
+stream = ExtResource("1_tbw7d")
+autoplay = true
 
 [node name="StaticBodies" type="Node" parent="."]
 
@@ -131,7 +144,7 @@ transform = Transform3D(-0.843794, 0, 0.536667, 0, 1, 0, -0.536667, 0, -0.843794
 transform = Transform3D(0.785112, 0, 0.619354, 0, 1, 0, -0.619354, 0, 0.785112, 5.83719, 3.52911, 4.54223)
 
 [node name="Boiler3" parent="StaticBodies" instance=ExtResource("6_3452x")]
-transform = Transform3D(0.999837, 0, 0.0180636, 0, 1, 0, -0.0180636, 0, 0.999837, 26.046, 4.10437, 26.8991)
+transform = Transform3D(0.910511, 0, 0.413486, 0, 1, 0, -0.413486, 0, 0.910511, 26.4455, 4.10437, 28.1814)
 
 [node name="Barrel" parent="StaticBodies" instance=ExtResource("7_tgot8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0326, 1, 7.05877)
@@ -186,11 +199,66 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.623
 [node name="Flag1" parent="TroopManagement/Wave0/SpawnMusketeer" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.71556e-06, 0, 113.194)
 
+[node name="Wave1" type="Node3D" parent="TroopManagement"]
+
+[node name="SpawnMusketeerRight" parent="TroopManagement/Wave1" instance=ExtResource("12_xsm8x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, 0)
+laneAttack = "Right"
+
+[node name="Flag1" parent="TroopManagement/Wave1/SpawnMusketeerRight" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90735e-06, 0, 55.2376)
+
+[node name="Cover" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeerRight/Flag1" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.50073, 0.05, -42.1328)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="SpawnMusketeer" parent="TroopManagement/Wave1" instance=ExtResource("12_xsm8x")]
+
+[node name="Flag1" parent="TroopManagement/Wave1/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.71556e-06, 0, 113.194)
+
+[node name="SpawnMusketeerLeft" parent="TroopManagement/Wave1" instance=ExtResource("12_xsm8x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3742, 0, 0)
+laneAttack = "Left"
+
+[node name="Flag1" parent="TroopManagement/Wave1/SpawnMusketeerLeft" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-06, 0, 54.0136)
+
+[node name="Cover" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeerLeft/Flag1" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37772, 3.93682, -36.9225)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="Flag2" type="Node3D" parent="TroopManagement/Wave1/SpawnMusketeerLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.7744, 0, 72.3475)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeerLeft/Flag2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
+[node name="Flag3" type="Node3D" parent="TroopManagement/Wave1/SpawnMusketeerLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.7744, 0, 79.177)
+
+[node name="Point" type="MeshInstance3D" parent="TroopManagement/Wave1/SpawnMusketeerLeft/Flag3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = SubResource("StandardMaterial3D_v4piu")
+mesh = SubResource("BoxMesh_2qrpk")
+
 [node name="Drops" parent="." instance=ExtResource("11_fytew")]
 unique_name_in_owner = true
 
 [node name="LoseArea" parent="." instance=ExtResource("12_0f3md")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.32986, 0.809474, 24.3779)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.32986, 0.809474, -32.4615)
+
+[node name="Stair" parent="." instance=ExtResource("15_qk3x4")]
+transform = Transform3D(-0.489531, 0.0241904, -0.87165, 0.0493553, 0.998781, 1.86265e-09, 0.870588, -0.0430206, -0.490128, -13.5885, -2.06529, 29.9142)
+
+[connection signal="finished" from="env/AudioStreamPlayer" to="LoseArea" method="_on_audio_stream_player_finished"]
 
 [editable path="TroopManagement"]
 [editable path="TroopManagement/Wave0/SpawnMusketeer"]
+[editable path="TroopManagement/Wave1/SpawnMusketeerRight"]
+[editable path="TroopManagement/Wave1/SpawnMusketeer"]
+[editable path="TroopManagement/Wave1/SpawnMusketeerLeft"]

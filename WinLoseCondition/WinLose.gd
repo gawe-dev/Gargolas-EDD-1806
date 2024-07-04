@@ -19,3 +19,7 @@ func _on_timer_timeout():
 	print("Enemigos vivos ",Global.enemigos_vivos)
 	if (Global.enemigos_vivos <= 0):
 		Global.win = true
+
+
+func _on_audio_stream_player_finished():
+	$"../env/AudioStreamPlayer".play()

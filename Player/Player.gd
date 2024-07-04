@@ -213,11 +213,11 @@ func GetDrops():
 			interactRay.get_collider().queue_free()
 	
 	if interactRay.is_colliding() and interactRay.get_collider().has_method("Interact"):
-		$Label.visible = true
+		$InteractF.visible = true
 		if Input.is_key_pressed(KEY_F):
 			interactRay.get_collider().Interact()
 	else:
-		$Label.visible = false
+		$InteractF.visible = false
 
 #endregion
 
