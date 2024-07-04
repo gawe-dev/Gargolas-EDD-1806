@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dyhp23o3d7744"]
+[gd_scene load_steps=28 format=3 uid="uid://dyhp23o3d7744"]
 
 [ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="1_hfud2"]
 [ext_resource type="AudioStream" uid="uid://bqpnh5sga6u8l" path="res://@Screens/Lvl2Gameplay/Gameplay.ogg" id="1_tbw7d"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://chm4kk02d5snm" path="res://Barrel/Barrel.tscn" id="7_tgot8"]
 [ext_resource type="PackedScene" uid="uid://dhx4m4bykwvss" path="res://Staticbodies/Barricade/Barricade.tscn" id="8_cd6rf"]
 [ext_resource type="PackedScene" uid="uid://da3mrwopjx8ek" path="res://@Commons/Blend/Recova.blend" id="9_x5wlf"]
+[ext_resource type="Script" path="res://@Screens/Lvl2Gameplay/Mid.gd" id="10_2ijy6"]
 [ext_resource type="PackedScene" uid="uid://dqdau0k3eifk1" path="res://TroopManagement/TroopManagement.tscn" id="10_73p5u"]
 [ext_resource type="PackedScene" uid="uid://c6lmichtnv4av" path="res://Drops/PlacementDrop.tscn" id="11_fytew"]
 [ext_resource type="PackedScene" uid="uid://c45cwd7u7i64m" path="res://WinLoseCondition/WinLose.tscn" id="12_0f3md"]
@@ -63,7 +64,6 @@ autoplay = true
 [node name="StaticBodies" type="Node" parent="."]
 
 [node name="Ground" type="CSGBox3D" parent="StaticBodies"]
-visible = false
 material_override = SubResource("StandardMaterial3D_rqgu5")
 use_collision = true
 size = Vector3(1000, 1, 1000)
@@ -181,6 +181,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5143, 0.5, 17.4745)
 transform = Transform3D(0.953381, 0, -0.301771, 0, 1, 0, 0.301771, 0, 0.953381, -20.7929, 0.5, -5.35755)
 
 [node name="Mid" type="Node" parent="."]
+script = ExtResource("10_2ijy6")
 
 [node name="Barricade" parent="Mid" instance=ExtResource("8_cd6rf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 19.5793)
@@ -429,6 +430,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 material_override = SubResource("StandardMaterial3D_swc6d")
 mesh = SubResource("BoxMesh_7g6j2")
 
+[node name="TroopManagement2" parent="." instance=ExtResource("10_73p5u")]
+process_mode = 4
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.623461, -7.41625, 27.2597)
+
+[node name="Flag1" parent="TroopManagement2/Wave0/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.77516e-06, 0, 79.4384)
+
+[node name="Wave1" type="Node3D" parent="TroopManagement2"]
+
+[node name="SpawnMusketeer" parent="TroopManagement2/Wave1" instance=ExtResource("12_xsm8x")]
+
+[node name="Flag1" parent="TroopManagement2/Wave1/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.77516e-06, 0, 79.4384)
+
+[node name="Wave2" type="Node3D" parent="TroopManagement2"]
+
+[node name="SpawnMusketeer" parent="TroopManagement2/Wave2" instance=ExtResource("12_xsm8x")]
+
+[node name="Flag1" parent="TroopManagement2/Wave2/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.77516e-06, 0, 79.4384)
+
 [node name="Drops" parent="." instance=ExtResource("11_fytew")]
 unique_name_in_owner = true
 
@@ -442,7 +464,7 @@ transform = Transform3D(-0.999667, 0.0245755, -0.00788849, 0.0245545, 0.999695, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09467, 0.500002, -72.5266)
 
 [node name="Fuerte2" parent="." instance=ExtResource("19_o884y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2076, 0.5, 158.937)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2076, 0.5, 117.621)
 
 [connection signal="finished" from="env/AudioStreamPlayer" to="LoseArea" method="_on_audio_stream_player_finished"]
 
@@ -459,3 +481,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2076, 0.5, 158.937)
 [editable path="TroopManagement/Wave2/SpawnMusketeerLeft"]
 [editable path="TroopManagement/Wave2/SpawnArquebusier3"]
 [editable path="TroopManagement/Wave2/SpawnArquebusier4"]
+[editable path="TroopManagement2"]
+[editable path="TroopManagement2/Wave0/SpawnMusketeer"]
+[editable path="TroopManagement2/Wave1/SpawnMusketeer"]
+[editable path="TroopManagement2/Wave2/SpawnMusketeer"]

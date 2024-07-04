@@ -206,11 +206,13 @@ func GetDrops():
 			$MeshInstance3D/WeaponsManager.AddAmmo("GunArquebus")
 			interactRay.get_collider().queue_free()
 		if interactRay.get_collider().name.contains("DropMate"):
+			interactRay.get_collider().queue_free()
 			if health <= 25:
 				health += 5
 			else:
 				health = 25
-			interactRay.get_collider().queue_free()
+			emit_signal("SignalHealth",health)
+			return
 	
 	if interactRay.is_colliding() and interactRay.get_collider().has_method("Interact"):
 		$InteractF.visible = true

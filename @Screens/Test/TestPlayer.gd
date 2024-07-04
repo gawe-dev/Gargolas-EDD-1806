@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var collision:CollisionShape3D = $CollisionShape3D
 
-var vida:int = 10
+var vida:int = 15
 
 func GetDamage(damage:int):
 	print("AH ", damage)
@@ -10,4 +10,4 @@ func GetDamage(damage:int):
 	if vida < 0 :
 		name += "Down"
 		collision.set_deferred("disabled",true)
-		$MeshInstance3D.visible = false
+		$Barricada.visible = false
