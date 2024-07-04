@@ -1,8 +1,8 @@
 extends Area3D
 
 
-const RANGE  : int = 20
-const DAMAGE : int = 1
+const RANGE  : int = 30
+const DAMAGE : int = 2
 var velocity : int = 0
 var shooted : bool = false
 

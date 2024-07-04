@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dyhp23o3d7744"]
+[gd_scene load_steps=27 format=3 uid="uid://dyhp23o3d7744"]
 
 [ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="1_hfud2"]
 [ext_resource type="AudioStream" uid="uid://bqpnh5sga6u8l" path="res://@Screens/Lvl2Gameplay/Gameplay.ogg" id="1_tbw7d"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://b63iywb03ygwr" path="res://MusketeerSpawner/SpawnMusketeer.tscn" id="12_xsm8x"]
 [ext_resource type="PackedScene" uid="uid://dd6ise8354thi" path="res://ArquebusierSpawner/SpawnArquebusier.tscn" id="14_k0xb5"]
 [ext_resource type="PackedScene" uid="uid://266hoadaaper" path="res://Staticbodies/Stair/Stair.tscn" id="15_qk3x4"]
+[ext_resource type="PackedScene" uid="uid://bbuwxo54lctjc" path="res://@Commons/Blend/Monumento.blend" id="18_nqus0"]
+[ext_resource type="PackedScene" uid="uid://co3if1cioeklf" path="res://@Commons/Blend/Fuerte.blend" id="19_o884y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6f1m2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -435,6 +437,12 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.5933
 
 [node name="Stair2" parent="." instance=ExtResource("15_qk3x4")]
 transform = Transform3D(-0.999667, 0.0245755, -0.00788849, 0.0245545, 0.999695, 0.00274732, 0.00795373, 0.00255271, -0.999965, 24.9816, -2.26634, -10.8702)
+
+[node name="Monumento" parent="." instance=ExtResource("18_nqus0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09467, 0.500002, -72.5266)
+
+[node name="Fuerte2" parent="." instance=ExtResource("19_o884y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2076, 0.5, 158.937)
 
 [connection signal="finished" from="env/AudioStreamPlayer" to="LoseArea" method="_on_audio_stream_player_finished"]
 

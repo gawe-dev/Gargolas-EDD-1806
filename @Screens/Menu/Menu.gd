@@ -15,7 +15,7 @@ func _on_info_button_up():
 func _on_info_hide_button_button_up():
 	infoImage.visible = false
 
-var busIndex :=0
+var busIndex := 0
 func _on_audio_button_up():
 	busIndex = AudioServer.get_bus_index("Master")
 	if AudioServer.is_bus_mute(busIndex):

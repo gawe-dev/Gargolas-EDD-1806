@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ywehbowv2uk5"]
 
 [ext_resource type="Script" path="res://@Screens/Lvl1Summary/Summary.gd" id="1_42vng"]
-[ext_resource type="VideoStream" path="res://@Screens/Lvl1Summary/Summary.ogv" id="2_jknl0"]
+[ext_resource type="VideoStream" path="res://@Screens/Lvl2Summary/Summary.ogv" id="2_jsxj6"]
 
 [node name="Summary" type="Control"]
 layout_mode = 3
@@ -24,7 +24,7 @@ offset_bottom = 739.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.639999, 0.639999)
-stream = ExtResource("2_jknl0")
+stream = ExtResource("2_jsxj6")
 autoplay = true
 
 [node name="Button" type="Button" parent="."]
@@ -34,37 +34,3 @@ offset_top = 274.0
 offset_right = 557.0
 offset_bottom = 305.0
 text = "Saltear"
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -540.0
-offset_top = -294.0
-offset_right = 31.0
-offset_bottom = -204.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 65
-text = "Resumen del nivel"
-
-[node name="Label2" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -458.0
-offset_top = -207.0
-offset_right = -32.0
-offset_bottom = -117.0
-grow_horizontal = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 65
-text = "placeholder"
-horizontal_alignment = 1

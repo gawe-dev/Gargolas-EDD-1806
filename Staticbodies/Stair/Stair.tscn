@@ -1,16 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://266hoadaaper"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_hjskr"]
-size = Vector3(0.1, 6, 1.54)
+[ext_resource type="PackedScene" uid="uid://dphnhaaaecq63" path="res://@Commons/GLB/Escalera.glb" id="1_pxxmm"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mv27t"]
 points = PackedVector3Array(0.05, 3, 0.77, -0.05, 3, 0.77, 0.05, -3, 0.77, 0.05, 3, -0.77, -0.05, 3, -0.77, -0.05, -3, 0.77, 0.05, -3, -0.77, -0.05, -3, -0.77)
 
 [node name="Stair" type="StaticBody3D" groups=["Stair"]]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-mesh = SubResource("BoxMesh_hjskr")
+[node name="Escalera2" parent="." instance=ExtResource("1_pxxmm")]
+transform = Transform3D(1.62722, 0, 0.892943, 0, 1.85612, 0, -0.892943, 0, 1.62722, 0, -0.610061, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)

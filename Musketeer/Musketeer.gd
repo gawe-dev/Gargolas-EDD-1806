@@ -54,7 +54,7 @@ func ManageGravity():
 		velocity.y = 2
 	if GravityState == GravityTypes.Infiltrating:
 		GetDamage(10)
-		climb_ray.get_collider().GetDamage(1)
+		climb_ray.get_collider().GetDamage(50)
 
 
 var speed : float

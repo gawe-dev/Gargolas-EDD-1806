@@ -1,20 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhx4m4bykwvss"]
 
 [ext_resource type="Script" path="res://@Screens/Test/TestPlayer.gd" id="1_b6sip"]
+[ext_resource type="PackedScene" uid="uid://yg7ry2qpipu1" path="res://@Commons/GLB/Barricada.glb" id="2_051xu"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_w4ym2"]
-size = Vector3(6, 1, 1)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_62i7o"]
-points = PackedVector3Array(3, 0.5, 0.5, 3, 0.5, -0.5, -3, 0.5, 0.5, 3, -0.5, 0.5, 3, -0.5, -0.5, -3, 0.5, -0.5, -3, -0.5, 0.5, -3, -0.5, -0.5)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q865u"]
+points = PackedVector3Array(6, 0.5, 0.5, 6, 0.5, -0.5, -6, 0.5, 0.5, 6, -0.5, 0.5, 6, -0.5, -0.5, -6, 0.5, -0.5, -6, -0.5, 0.5, -6, -0.5, -0.5)
 
 [node name="Barricade" type="StaticBody3D" groups=["Barricade"]]
 script = ExtResource("1_b6sip")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_w4ym2")
+[node name="Barricada" parent="." instance=ExtResource("2_051xu")]
+transform = Transform3D(0.812849, 0, -0.19191, 0, 0.835197, 0, 0.19191, 0, 0.812849, -0.937912, -0.0412884, 0.572842)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("ConvexPolygonShape3D_62i7o")
+shape = SubResource("ConvexPolygonShape3D_q865u")

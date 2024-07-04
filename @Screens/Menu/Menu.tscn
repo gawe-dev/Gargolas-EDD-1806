@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://h2s6h3ff23vj"]
+[gd_scene load_steps=9 format=3 uid="uid://h2s6h3ff23vj"]
 
 [ext_resource type="Texture2D" uid="uid://nqhr5pcw81bu" path="res://@Screens/Menu/Menu.png" id="1_2koeo"]
 [ext_resource type="Script" path="res://@Screens/Menu/Menu.gd" id="1_fufnv"]
 [ext_resource type="AudioStream" uid="uid://d1mygedhxa0vx" path="res://@Screens/Menu/Menu.ogg" id="2_xkume"]
 [ext_resource type="Texture2D" uid="uid://ccuqre1s0m5k2" path="res://@Commons/Images/Interfaz/Botones_STAR.png" id="3_tmji7"]
+[ext_resource type="FontFile" uid="uid://dtl1re0ct6245" path="res://@Commons/Font/paradise_love/ParadiseLove.otf" id="4_nhtc6"]
 [ext_resource type="Texture2D" uid="uid://cf3n20ri5i0lr" path="res://@Commons/Images/Interfaz/Info.png" id="5_8hhrh"]
 [ext_resource type="Texture2D" uid="uid://r4sghhfrdao7" path="res://@Commons/Images/Interfaz/Audio.png" id="6_aeqd0"]
 [ext_resource type="Texture2D" uid="uid://cejcox321e2i6" path="res://@Commons/Images/Interfaz/Info_1.png" id="7_wlahd"]
@@ -50,13 +51,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -42.5
-offset_top = -30.5
-offset_right = 42.5
-offset_bottom = 30.5
+offset_left = -143.5
+offset_top = -48.0
+offset_right = 143.5
+offset_bottom = 41.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 41
+theme_override_fonts/font = ExtResource("4_nhtc6")
+theme_override_font_sizes/font_size = 45
 text = "Jugar"
 flat = true
 
