@@ -54,7 +54,7 @@ func ManageGravity():
 		velocity.y = 2
 	if GravityState == GravityTypes.Infiltrating:
 		GetDamage(10)
-		climb_ray.get_collider().GetDamage(1)
+		#climb_ray.get_collider().GetDamage(1)
 
 
 var speed : float
@@ -180,7 +180,7 @@ func SensorPrepareAim():
 	if target_in_range:
 		shoot_target = target.global_position
 	else:
-		if current_barricade < barricades.size()-1:
+		if current_barricade < barricades.size():
 			shoot_target = barricades[current_barricade].global_position
 			barricade_in_range = (global_position - barricades[current_barricade].global_position).length() < (bullet.RANGE -5)
 		else:

@@ -3,8 +3,8 @@ extends StaticBody3D
 
 var vida:= 1
 var damage := 20
-func GetDamage(damage:int):
-	vida -= damage
+func GetDamage(_damage:int):
+	vida -= _damage
 	if vida <= 0:
 		$AnimationPlayer.play("Explode")
 

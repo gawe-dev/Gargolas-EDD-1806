@@ -15,8 +15,8 @@ func _ready():
 	for node in find_child("Wave1",false).find_children("Spawn*", "Node3D"):
 		Wave1.push_back(node)
 		
-	#for node in find_child("Wave2",false).find_children("Spawn*", "Node3D"):
-		#Wave2.push_back(node)
+	for node in find_child("Wave2",false).find_children("Spawn*", "Node3D"):
+		Wave2.push_back(node)
 	
 	CreateActiveWave()
 
