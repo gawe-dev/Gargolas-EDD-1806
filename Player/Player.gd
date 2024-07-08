@@ -91,17 +91,36 @@ func InputJump():
 
 #region Input del hook
 
-@onready var gancho:Node3D = $FreeGancho/Hook
+
+@onready var timer : Timer = $Timer
+@onready var hook: Node3D = $FreeGancho/Hook
+var stockHook: int = 5
 func InputHook():
+	if timer.time_left == 0 or stockHook >= 5:
+		$CanvasLayer/Hook/Timer.text = ""
+	else:
+		$CanvasLayer/Hook/Timer.text = str(timer.time_left,0).substr(0,3)
+	$CanvasLayer/Hook/Stock.text = str(stockHook)
 	if Input.is_action_just_pressed("hook"):
-		if rayHook.is_colliding():
-			gravity_state = "Hooking"
-			hook_position = rayHook.get_collision_point()
-			gancho.global_position = global_position
-			gancho.look_at(hook_position,Vector3.UP,true)
-			gancho.global_position = hook_position
-		else:
-			gravity_state = "Falling"
+		if stockHook > 0:
+			if rayHook.is_colliding():
+				if timer.is_stopped():
+					timer.start()
+				stockHook -= 1
+				gravity_state = "Hooking"
+				hook_position = rayHook.get_collision_point()
+				hook.global_position = global_position
+				hook.look_at(hook_position,Vector3.UP,true)
+				hook.global_position = hook_position
+			else:
+				gravity_state = "Falling"
+
+
+func _on_timer_timeout():
+	if stockHook < 5:
+		stockHook += 1
+	else:
+		timer.stop()
 
 
 #endregion
@@ -113,6 +132,7 @@ func InputHook():
 var input_dir : Vector2
 var direction : Vector3
 var speed := 5.0
+@onready var soundWalk:AudioStreamPlayer3D = $WalkSound
 func InputMovement():
 	input_dir = Input.get_vector("left", "right", "forward", "back")
 	direction = (twist_pivot.basis * transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -122,9 +142,12 @@ func InputMovement():
 		velocity.z = direction.z * speed
 		if is_on_floor():
 			anim_actual = RUN
+			if not soundWalk.playing:
+				soundWalk.play()
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+		soundWalk.stop()
 
 
 #endregion
@@ -273,4 +296,5 @@ func VICTORIA():
 	if not $ResetMenu/ColorRect/Lose.visible:
 		$ResetMenu.visible = true
 		$ResetMenu/ColorRect/Win.visible = true
+
 

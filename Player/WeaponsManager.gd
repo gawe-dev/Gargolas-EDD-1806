@@ -17,7 +17,7 @@ var Weapon_List = {}
 
 @export var Start_Weapons: Array[String]
 
-enum {NULL, HITSCAN, PROJECTILE, MELE}
+enum {NULL = 0, HITSCAN=1 , PROJECTILE = 2, MELE = 4}
 
 func _ready():
 	Initialize(Start_Weapons)
@@ -67,6 +67,8 @@ func _on_animation_player_animation_finished(anim_name):
 		if Input.is_action_pressed("Shoot"):
 			shoot()
 
+@onready var shootSound : AudioStreamPlayer3D = $ShootSound
+@onready var swordSound : AudioStreamPlayer3D = $SwordSound
 func shoot():
 	if Current_Weapon.Current_Ammo != 0:
 		if !Animation_Player.is_playing():
@@ -78,8 +80,10 @@ func shoot():
 				NULL:
 					print("Weapon Type Not Chosem")
 				HITSCAN:
+					shootSound.play()
 					Hit_Scan_Collision(Camera_Collision)
 				MELE:
+					swordSound.play()
 					pass
 	else:
 		reload()

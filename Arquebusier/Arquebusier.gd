@@ -194,11 +194,14 @@ func SensorPrepareAim():
 
 #region Calleables
 
-
+@onready var soundDeath:AudioStreamPlayer3D = $Death
 var health := 1
 func GetDamage(damage:int):
 	health -= damage
 	if health <= 0:
+		soundDeath.reparent(get_tree().current_scene)
+		soundDeath.play()
+		soundDeath.connect("finished",soundDeath.queue_free)
 		drops.createDrop(global_position)
 		queue_free()
 		Global.enemigos_vivos -= 1

@@ -36,8 +36,9 @@ func desactivar():
 
 func shootBullet(target_position):
 	initial()
-	activar()
 	look_at(target_position, Vector3.UP, true)
+	activar()
+	$ShootSound.play()
 
 
 var initial_position : Vector3

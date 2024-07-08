@@ -60,6 +60,7 @@ environment = SubResource("Environment_tawx4")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="env"]
 stream = ExtResource("1_tbw7d")
 autoplay = true
+bus = &"Music"
 
 [node name="StaticBodies" type="Node" parent="."]
 

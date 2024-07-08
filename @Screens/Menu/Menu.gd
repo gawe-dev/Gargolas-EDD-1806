@@ -17,7 +17,7 @@ func _on_info_hide_button_button_up():
 
 var busIndex := 0
 func _on_audio_button_up():
-	busIndex = AudioServer.get_bus_index("Master")
+	busIndex = AudioServer.get_bus_index("Music")
 	if AudioServer.is_bus_mute(busIndex):
 		AudioServer.set_bus_mute(busIndex, false)
 	else:

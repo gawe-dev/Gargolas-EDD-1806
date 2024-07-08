@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bned4jbt5md32"]
+[gd_scene load_steps=12 format=3 uid="uid://bned4jbt5md32"]
 
 [ext_resource type="Script" path="res://Musketeer/Musketeer.gd" id="1_ued8u"]
 [ext_resource type="Script" path="res://Musketeer/MusketeerBullet.gd" id="2_4ywf7"]
 [ext_resource type="PackedScene" uid="uid://cub1uy7ivf4lf" path="res://@Commons/Blend/EnemigoInf.blend" id="2_275pn"]
 [ext_resource type="PackedScene" uid="uid://bnhigd2wme6oh" path="res://@Commons/Blend/EnemigoSup.blend" id="3_780i6"]
 [ext_resource type="PackedScene" uid="uid://dakpu5sabbcbx" path="res://@Commons/GLB/musket.glb" id="4_hr6q2"]
+[ext_resource type="AudioStream" uid="uid://bkx8ujtw4k7yh" path="res://@Commons/Sounds/shoot.ogg" id="6_inek4"]
+[ext_resource type="AudioStream" uid="uid://bgsabffgvs53c" path="res://@Commons/Sounds/Death.ogg" id="7_elfcn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yctua"]
 radius = 0.25
@@ -65,7 +67,6 @@ editor_description = "Este nodo es necesario para que la bala funcione globalmen
 
 [node name="Bullet" type="Area3D" parent="HighBody/MeshGun/NecessaryNode"]
 transform = Transform3D(1, 3.11218e-12, 0, 2.67164e-12, 1, 3.49246e-10, 8.73115e-11, 0, 1, -0.238825, 1.53585, 0.778425)
-visible = false
 collision_layer = 0
 monitoring = false
 script = ExtResource("2_4ywf7")
@@ -78,9 +79,19 @@ mesh = SubResource("SphereMesh_nu7pp")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HighBody/MeshGun/NecessaryNode/Bullet"]
 shape = SubResource("SeparationRayShape3D_safmi")
 
+[node name="ShootSound" type="AudioStreamPlayer3D" parent="HighBody/MeshGun/NecessaryNode/Bullet"]
+stream = ExtResource("6_inek4")
+bus = &"Player"
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="Death" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, -2.67164e-12, -8.73115e-11, 2.67164e-12, 1, 0, 8.73115e-11, -5.04994e-22, 1, 0, 0, 0)
+stream = ExtResource("7_elfcn")
+volume_db = 40.0
+bus = &"Player"
 
 [editable path="LowBody/EnemigoInf"]
 [editable path="HighBody/EnemigoSup"]
