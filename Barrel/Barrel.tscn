@@ -186,12 +186,12 @@ libraries = {
 }
 
 [node name="Barril" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.285742, 0, 0, 0, 0.285742, 0, 0, 0, 0.285742, 0, 0, 0)
+transform = Transform3D(-1.24902e-08, -0.285742, 0, 0.285742, -1.24902e-08, 0, 0, 0, 0.285742, 0.620802, 0.276703, 0)
 mesh = SubResource("ArrayMesh_ioc8y")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.285742, 0, 0, 0, 0.285742, 0, 0, 0, 0.285742, 0, 0.603072, 0)
+transform = Transform3D(0.285742, 0, 0, 0, 0.285742, 0, 0, 0, 0.285742, 0, 0.31733, 0)
 shape = SubResource("ConvexPolygonShape3D_gdh02")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

@@ -94,7 +94,8 @@ func InputJump():
 
 @onready var timer : Timer = $Timer
 @onready var hook: Node3D = $FreeGancho/Hook
-var stockHook: int = 5
+var stockHook: int = 4
+const MAXSTOCKHOOK := 4 
 func InputHook():
 	if timer.time_left == 0 or stockHook >= 5:
 		$CanvasLayer/Hook/Timer.text = ""
@@ -104,7 +105,7 @@ func InputHook():
 	if Input.is_action_just_pressed("hook"):
 		if stockHook > 0:
 			if rayHook.is_colliding():
-				if timer.is_stopped():
+				if timer.is_stopped() and stockHook <= MAXSTOCKHOOK:
 					timer.start()
 				stockHook -= 1
 				gravity_state = "Hooking"
@@ -117,7 +118,7 @@ func InputHook():
 
 
 func _on_timer_timeout():
-	if stockHook < 5:
+	if stockHook < MAXSTOCKHOOK:
 		stockHook += 1
 	else:
 		timer.stop()

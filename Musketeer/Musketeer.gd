@@ -138,12 +138,15 @@ func ManageRoute():
 		else: #si la bandera no tiene hijos
 			NextFlagOrDie()
 			look_at(flags[current_flag].global_position, Vector3.UP,true)
+			rotation.x = 0
+			rotation.z = 0
 
 func NextFlagOrDie():
 	if (global_position - flags[current_flag].global_position).length() < 1:
 		if current_flag + 1 < flags.size():
 			current_flag += 1
-		
+		else:
+			GetDamage(50)
 
 #endregion
 

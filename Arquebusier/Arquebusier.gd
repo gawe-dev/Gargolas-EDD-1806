@@ -138,6 +138,8 @@ func ManageRoute():
 		else: #si la bandera no tiene hijos
 			NextFlagOrDie()
 			look_at(flags[current_flag].global_position, Vector3.UP,true)
+			rotation.x = 0
+			rotation.z = 0
 
 func NextFlagOrDie():
 	if (global_position - flags[current_flag].global_position).length() < 1:
@@ -157,6 +159,8 @@ func UpdateCurrentBarricade():
 	if current_barricade < barricades.size():
 		if barricade_in_range and barricades[current_barricade].name.contains("Down"):
 			current_barricade += 1
+		else:
+			GetDamage(50)
 
 
 enum GravityTypes { Falling, Climbing, Infiltrating }

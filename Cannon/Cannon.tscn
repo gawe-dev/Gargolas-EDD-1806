@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://kmshs1fudqar"]
+
+[ext_resource type="Script" path="res://Cannon/Cannon.gd" id="1_sqkwo"]
+[ext_resource type="PackedScene" uid="uid://3l1d0nlj7cf6" path="res://@Commons/Blend/Cañon.blend" id="2_ioaeb"]
+[ext_resource type="AudioStream" uid="uid://bkx8ujtw4k7yh" path="res://@Commons/Sounds/shoot.ogg" id="4_3y6jx"]
+[ext_resource type="Script" path="res://Cannon/CannonBullet.gd" id="5_b2vbt"]
+[ext_resource type="AudioStream" uid="uid://k47hq51ct6tk" path="res://@Commons/Sounds/CannonDeath.ogg" id="5_vpo47"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yctua"]
+radius = 1.02679
+height = 4.0
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_safmi"]
+length = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnuel"]
+albedo_color = Color(0.231373, 0.231373, 0.231373, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ax5gy"]
+radius = 0.3
+height = 0.6
+radial_segments = 4
+rings = 1
+
+[node name="Cannon" type="CharacterBody3D" groups=["Enemy"]]
+wall_min_slide_angle = 0.0
+script = ExtResource("1_sqkwo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0.0770577)
+shape = SubResource("CapsuleShape3D_yctua")
+
+[node name="Body" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84242, 2.50921)
+
+[node name="Cañon" parent="Body" instance=ExtResource("2_ioaeb")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -0.877517, -2.52675)
+
+[node name="NecessaryNode" type="Node" parent="Body"]
+editor_description = "Este nodo es necesario para que la bala funcione globalmente y no con la posición inherit"
+
+[node name="Bullet" type="Area3D" parent="Body/NecessaryNode"]
+transform = Transform3D(1, 3.11218e-12, 0, 2.67164e-12, 1, 3.49246e-10, 8.73115e-11, 0, 1, 0.017834, 1.79982, 2.40637)
+script = ExtResource("5_b2vbt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/NecessaryNode/Bullet"]
+shape = SubResource("SeparationRayShape3D_safmi")
+
+[node name="MeshBullet" type="MeshInstance3D" parent="Body/NecessaryNode/Bullet"]
+transform = Transform3D(1, 0, 0, -3.04932e-20, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_dnuel")
+mesh = SubResource("SphereMesh_ax5gy")
+
+[node name="ShootSound" type="AudioStreamPlayer3D" parent="Body/NecessaryNode/Bullet"]
+stream = ExtResource("4_3y6jx")
+bus = &"Player"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Death" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, -2.67164e-12, -8.73115e-11, 2.67164e-12, 1, 2.71729e-22, 8.73115e-11, -5.04994e-22, 1, 0, 2.39096, 0)
+stream = ExtResource("5_vpo47")
+volume_db = 40.0
+bus = &"Player"

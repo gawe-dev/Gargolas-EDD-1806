@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dyhp23o3d7744"]
+[gd_scene load_steps=34 format=3 uid="uid://dyhp23o3d7744"]
 
 [ext_resource type="PackedScene" uid="uid://bedho26bpm4cs" path="res://Player/Player.tscn" id="1_hfud2"]
 [ext_resource type="AudioStream" uid="uid://bqpnh5sga6u8l" path="res://@Screens/Lvl2Gameplay/Gameplay.ogg" id="1_tbw7d"]
@@ -9,15 +9,21 @@
 [ext_resource type="PackedScene" uid="uid://hwtyetar2ijw" path="res://Boiler/Boiler.tscn" id="6_3452x"]
 [ext_resource type="PackedScene" uid="uid://chm4kk02d5snm" path="res://Barrel/Barrel.tscn" id="7_tgot8"]
 [ext_resource type="PackedScene" uid="uid://dhx4m4bykwvss" path="res://Staticbodies/Barricade/Barricade.tscn" id="8_cd6rf"]
+[ext_resource type="Script" path="res://@Screens/Lvl2Gameplay/Left.gd" id="9_l7shp"]
 [ext_resource type="PackedScene" uid="uid://da3mrwopjx8ek" path="res://@Commons/Blend/Recova.blend" id="9_x5wlf"]
 [ext_resource type="Script" path="res://@Screens/Lvl2Gameplay/Mid.gd" id="10_2ijy6"]
 [ext_resource type="PackedScene" uid="uid://dqdau0k3eifk1" path="res://TroopManagement/TroopManagement.tscn" id="10_73p5u"]
 [ext_resource type="PackedScene" uid="uid://c6lmichtnv4av" path="res://Drops/PlacementDrop.tscn" id="11_fytew"]
+[ext_resource type="PackedScene" uid="uid://c5c30p1e63u26" path="res://@Commons/Blend/ArbolC.blend" id="11_nigod"]
+[ext_resource type="Script" path="res://@Screens/Lvl2Gameplay/Right.gd" id="11_yj44c"]
 [ext_resource type="PackedScene" uid="uid://c45cwd7u7i64m" path="res://WinLoseCondition/WinLose.tscn" id="12_0f3md"]
+[ext_resource type="PackedScene" uid="uid://gj32ha5b8jwu" path="res://@Commons/Blend/ArbolS.blend" id="12_5vesk"]
 [ext_resource type="PackedScene" uid="uid://b63iywb03ygwr" path="res://MusketeerSpawner/SpawnMusketeer.tscn" id="12_xsm8x"]
+[ext_resource type="PackedScene" uid="uid://dipulauy8uaej" path="res://@Commons/Blend/Carreta.blend" id="13_k61h7"]
 [ext_resource type="PackedScene" uid="uid://dd6ise8354thi" path="res://ArquebusierSpawner/SpawnArquebusier.tscn" id="14_k0xb5"]
 [ext_resource type="PackedScene" uid="uid://266hoadaaper" path="res://Staticbodies/Stair/Stair.tscn" id="15_qk3x4"]
 [ext_resource type="PackedScene" uid="uid://bbuwxo54lctjc" path="res://@Commons/Blend/Monumento.blend" id="18_nqus0"]
+[ext_resource type="PackedScene" uid="uid://cpv46e5lbg3dg" path="res://CannonSpawner/SpawnCannon.tscn" id="18_opbmg"]
 [ext_resource type="PackedScene" uid="uid://co3if1cioeklf" path="res://@Commons/Blend/Fuerte.blend" id="19_o884y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6f1m2"]
@@ -59,6 +65,7 @@ environment = SubResource("Environment_tawx4")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="env"]
 stream = ExtResource("1_tbw7d")
+volume_db = -19.0
 autoplay = true
 bus = &"Music"
 
@@ -158,22 +165,68 @@ transform = Transform3D(0.785112, 0, 0.619354, 0, 1, 0, -0.619354, 0, 0.785112, 
 transform = Transform3D(0.910511, 0, 0.413486, 0, 1, 0, -0.413486, 0, 0.910511, 26.4455, 4.10437, 28.1814)
 
 [node name="Barrel" parent="StaticBodies" instance=ExtResource("7_tgot8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0326, 1, 7.05877)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0326, 1.2932, 7.05877)
 
 [node name="Barrel4" parent="StaticBodies" instance=ExtResource("7_tgot8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8324, 1, 7.05877)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8416, 1.2932, 19.6232)
 
 [node name="Barrel2" parent="StaticBodies" instance=ExtResource("7_tgot8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.21089, 0.500001, -15.7316)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.21089, 0.793198, -15.7316)
 
 [node name="Barrel3" parent="StaticBodies" instance=ExtResource("7_tgot8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.56211, 0.500001, -16.3687)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.56211, 0.793198, -16.3687)
+
+[node name="Stair2" parent="StaticBodies" instance=ExtResource("15_qk3x4")]
+transform = Transform3D(-0.999667, 0.0245755, -0.00788849, 0.0245545, 0.999695, 0.00274732, 0.00795373, 0.00255271, -0.999965, 24.9816, -2.26634, -10.8702)
+
+[node name="Monumento" parent="StaticBodies" instance=ExtResource("18_nqus0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09467, 0.500002, -72.5266)
+
+[node name="Fuerte2" parent="StaticBodies" instance=ExtResource("19_o884y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2076, 0.5, 117.621)
+
+[node name="ArbolC" parent="StaticBodies" instance=ExtResource("11_nigod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9736, 0.5, -12.5322)
+
+[node name="ArbolS" parent="StaticBodies" instance=ExtResource("12_5vesk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.7745, 0.499998, 5.77961)
+
+[node name="ArbolC2" parent="StaticBodies" instance=ExtResource("11_nigod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.2309, 0.499998, -23.3892)
+
+[node name="ArbolC3" parent="StaticBodies" instance=ExtResource("11_nigod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.8036, 0.499998, -8.62283)
+
+[node name="ArbolS2" parent="StaticBodies" instance=ExtResource("12_5vesk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.3103, 0.499998, -15.7348)
+
+[node name="ArbolC4" parent="StaticBodies" instance=ExtResource("11_nigod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.89964, 0.5, -1.39694)
+
+[node name="ArbolS3" parent="StaticBodies" instance=ExtResource("12_5vesk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5947, 0.5, 15.367)
+
+[node name="ArbolS4" parent="StaticBodies" instance=ExtResource("12_5vesk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5503, 0.499996, -17.281)
+
+[node name="ArbolC5" parent="StaticBodies" instance=ExtResource("11_nigod")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.56682, 0.500004, -0.839382)
+
+[node name="Carreta" parent="StaticBodies" instance=ExtResource("13_k61h7")]
+transform = Transform3D(0.675616, 0, 0.737254, 0, 1, 0, -0.737254, 0, 0.675616, 13.2487, 1.69104, -25.819)
+
+[node name="Carreta2" parent="StaticBodies" instance=ExtResource("13_k61h7")]
+transform = Transform3D(-0.0381991, -0.432371, 0.900886, 0.982268, -0.181846, -0.0456254, 0.18355, 0.883169, 0.431651, 2.16366, 1.69104, -37.0193)
+
+[node name="Carreta3" parent="StaticBodies" instance=ExtResource("13_k61h7")]
+transform = Transform3D(-0.0381991, -0.432371, 0.900886, 0.999262, -0.0128686, 0.0361943, -0.00405635, 0.901604, 0.432544, -24.7941, 1.69104, -12.23)
 
 [node name="Player" parent="." instance=ExtResource("1_hfud2")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.84193, 21.5065, -99.0361)
 
 [node name="Left" type="Node" parent="."]
+script = ExtResource("9_l7shp")
 
 [node name="Barricade3" parent="Left" instance=ExtResource("8_cd6rf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5143, 0.5, 17.4745)
@@ -191,6 +244,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 19.5793)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -4.55177)
 
 [node name="Right" type="Node" parent="."]
+script = ExtResource("11_yj44c")
 
 [node name="Barricade3" parent="Right" instance=ExtResource("8_cd6rf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7275, 0.5, 22.6059)
@@ -207,6 +261,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 
 [node name="TroopManagement" parent="." instance=ExtResource("10_73p5u")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.623463, 0.500015, 44.6908)
+is_initial = true
 
 [node name="Flag1" parent="TroopManagement/Wave0/SpawnMusketeer" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.77516e-06, 0, 79.4384)
@@ -452,20 +507,110 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.77516e-06, 0, 79.4384)
 [node name="Flag1" parent="TroopManagement2/Wave2/SpawnMusketeer" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.77516e-06, 0, 79.4384)
 
+[node name="TroopManagement3" parent="." instance=ExtResource("10_73p5u")]
+process_mode = 4
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 27.393, -7.496, 32.817)
+
+[node name="Wave0" parent="TroopManagement3" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.91912, 0, -0.249073)
+
+[node name="SpawnMusketeer" parent="TroopManagement3/Wave0" index="0"]
+laneAttack = "Right"
+
+[node name="Flag1" parent="TroopManagement3/Wave0/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51076, 0, 40.5611)
+
+[node name="SpawnCannon" parent="TroopManagement3/Wave0" index="1" instance=ExtResource("18_opbmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+laneAttack = "Right"
+
+[node name="Flag1" parent="TroopManagement3/Wave0/SpawnCannon" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.914455, 0, 40.773)
+
+[node name="Wave1" type="Node3D" parent="TroopManagement3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.91912, 0, -0.249073)
+
+[node name="SpawnMusketeer" parent="TroopManagement3/Wave1" instance=ExtResource("12_xsm8x")]
+laneAttack = "Right"
+
+[node name="Flag1" parent="TroopManagement3/Wave1/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51076, 0, 40.5611)
+
+[node name="SpawnCannon" parent="TroopManagement3/Wave1" instance=ExtResource("18_opbmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+laneAttack = "Right"
+
+[node name="Flag1" parent="TroopManagement3/Wave1/SpawnCannon" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.914455, 0, 40.773)
+
+[node name="Wave2" type="Node3D" parent="TroopManagement3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.91912, 0, -0.249073)
+
+[node name="SpawnMusketeer" parent="TroopManagement3/Wave2" instance=ExtResource("12_xsm8x")]
+laneAttack = "Right"
+
+[node name="Flag1" parent="TroopManagement3/Wave2/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51076, 0, 40.5611)
+
+[node name="SpawnCannon" parent="TroopManagement3/Wave2" instance=ExtResource("18_opbmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+laneAttack = "Right"
+
+[node name="Flag1" parent="TroopManagement3/Wave2/SpawnCannon" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.914455, 0, 40.773)
+
+[node name="TroopManagement4" parent="." instance=ExtResource("10_73p5u")]
+process_mode = 4
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -21.7667, -7.41625, 32.8168)
+
+[node name="SpawnMusketeer" parent="TroopManagement4/Wave0" index="0"]
+laneAttack = "Left"
+
+[node name="Flag1" parent="TroopManagement4/Wave0/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-06, 0, 46.0744)
+
+[node name="SpawnCannon" parent="TroopManagement4/Wave0" index="1" instance=ExtResource("18_opbmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3.8147e-06)
+laneAttack = "Left"
+
+[node name="Flag1" parent="TroopManagement4/Wave0/SpawnCannon" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06474, 0, 45.4001)
+
+[node name="Wave1" type="Node3D" parent="TroopManagement4"]
+
+[node name="SpawnMusketeer" parent="TroopManagement4/Wave1" instance=ExtResource("12_xsm8x")]
+laneAttack = "Left"
+
+[node name="Flag1" parent="TroopManagement4/Wave1/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-06, 0, 46.0744)
+
+[node name="SpawnCannon" parent="TroopManagement4/Wave1" instance=ExtResource("18_opbmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3.8147e-06)
+laneAttack = "Left"
+
+[node name="Flag1" parent="TroopManagement4/Wave1/SpawnCannon" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06474, 0, 45.4001)
+
+[node name="Wave2" type="Node3D" parent="TroopManagement4"]
+
+[node name="SpawnMusketeer" parent="TroopManagement4/Wave2" instance=ExtResource("12_xsm8x")]
+laneAttack = "Left"
+
+[node name="Flag1" parent="TroopManagement4/Wave2/SpawnMusketeer" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.53674e-06, 0, 46.0744)
+
+[node name="SpawnCannon" parent="TroopManagement4/Wave2" instance=ExtResource("18_opbmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3.8147e-06)
+laneAttack = "Left"
+
+[node name="Flag1" parent="TroopManagement4/Wave2/SpawnCannon" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06474, 0, 45.4001)
+
 [node name="Drops" parent="." instance=ExtResource("11_fytew")]
 unique_name_in_owner = true
 
 [node name="LoseArea" parent="." instance=ExtResource("12_0f3md")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.59339, 0.809474, -32.494)
-
-[node name="Stair2" parent="." instance=ExtResource("15_qk3x4")]
-transform = Transform3D(-0.999667, 0.0245755, -0.00788849, 0.0245545, 0.999695, 0.00274732, 0.00795373, 0.00255271, -0.999965, 24.9816, -2.26634, -10.8702)
-
-[node name="Monumento" parent="." instance=ExtResource("18_nqus0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09467, 0.500002, -72.5266)
-
-[node name="Fuerte2" parent="." instance=ExtResource("19_o884y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2076, 0.5, 117.621)
 
 [connection signal="finished" from="env/AudioStreamPlayer" to="LoseArea" method="_on_audio_stream_player_finished"]
 
@@ -486,3 +631,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2076, 0.5, 117.621)
 [editable path="TroopManagement2/Wave0/SpawnMusketeer"]
 [editable path="TroopManagement2/Wave1/SpawnMusketeer"]
 [editable path="TroopManagement2/Wave2/SpawnMusketeer"]
+[editable path="TroopManagement3"]
+[editable path="TroopManagement3/Wave0/SpawnMusketeer"]
+[editable path="TroopManagement3/Wave0/SpawnCannon"]
+[editable path="TroopManagement3/Wave1/SpawnMusketeer"]
+[editable path="TroopManagement3/Wave1/SpawnCannon"]
+[editable path="TroopManagement3/Wave2/SpawnMusketeer"]
+[editable path="TroopManagement3/Wave2/SpawnCannon"]
+[editable path="TroopManagement4"]
+[editable path="TroopManagement4/Wave0/SpawnMusketeer"]
+[editable path="TroopManagement4/Wave0/SpawnCannon"]
+[editable path="TroopManagement4/Wave1/SpawnMusketeer"]
+[editable path="TroopManagement4/Wave1/SpawnCannon"]
+[editable path="TroopManagement4/Wave2/SpawnMusketeer"]
+[editable path="TroopManagement4/Wave2/SpawnCannon"]
